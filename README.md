@@ -1,13 +1,7 @@
-# IBM Cloud <module_name> - Terraform Module
+# IBM Cloud Cloudant - Terraform Module
 
-Mention the purpose of writing these modules.
-
-E.g:
-
-This is a collection of modules that make it easier to provision and configure Observability services like logging, monitor and activity tracker on IBM Cloud Platform:
-* [logging-logdna](modules/logging-logdna)
-* [monitoring-sysdig](modules/monitoring-sysdig)
-* [activity-tracker-logdna](modules/activity-tracker-logdna)
+This is a collection of modules that make it easier to provision observability services like logging, monitor and activity tracker on IBM Cloud Platform:
+* [cloudant](modules/cloudant)
 
 ## Compatibility
 
@@ -15,32 +9,35 @@ This module is meant for use with Terraform 0.13 (and higher).
 
 ## Usage
 
-Full examples are in the [examples](./examples/) folder, demonstarte how to use a module through a template:
-
-e.g:
+Full examples are in the [examples](./examples/) folder, but basic usage is as follows for creation of logdna instance & key:
 
 ```hcl
 provider "ibm" {
 }
 
-data "ibm_resource_group" "logdna" {
+data "ibm_resource_group" "cloudant" {
   name = var.resource_group
 }
 
-module "logdna_instance" {
-  source  = "terraform-ibm-modules/observability/ibm//modules/logging-logdna"
+module "cloudant_instance" {
+  //Uncomment the following line to point the source to registry level
+  //source = "terraform-ibm-modules/cloudant/ibm//modules/cloudant-instance"
 
-
-  bind_resource_key   = var.bind_resource_key
-  service_name        = var.service_name
-  resource_group_id   = data.ibm_resource_group.logdna.id
-  plan                = var.plan
-  region              = var.region
-  service_endpoints   = var.service_endpoints
-  tags                = var.tags
-  resource_key_name   = var.resource_key_name
-  role                = var.role
-  resource_key_tags   = var.resource_key_tags
+  source            = "../../modules/cloudant"
+  bind_resource_key = var.bind_resource_key
+  instance_name     = var.instance_name
+  resource_group_id = data.ibm_resource_group.cloudant.id
+  plan              = var.plan
+  region            = var.region
+  service_endpoints = var.service_endpoints
+  parameters        = var.parameters
+  tags              = var.tags
+  create_timeout    = var.create_timeout
+  update_timeout    = var.update_timeout
+  delete_timeout    = var.delete_timeout
+  resource_key_name = var.resource_key_name
+  role              = var.role
+  resource_key_tags = var.resource_key_tags
 }
 
 ```
@@ -80,7 +77,7 @@ or
 ```
 pip3 install pre-commit
 ```
-## How to input variable values through a file
+## How to input varaible values through a file
 
 To review the plan for the configuration defined (no resources actually provisioned)
 ```
@@ -98,5 +95,5 @@ terraform destroy -var-file=./input.tfvars
 
 ## Note
 
-All optional parameters, by default, will be set to `null` in respective example's variable.tf file. You can also override these optional parameters.
+All optional parameters, by default, will be set to `null` in respective example's varaible.tf file. You can also override these optional parameters.
 
