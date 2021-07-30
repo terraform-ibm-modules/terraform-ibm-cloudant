@@ -1,8 +1,7 @@
 # IBM Cloud Cloudant - Terraform Module
 
-This is a collection of modules that make it easier to provision cloudant instance and assign service prolicy , creates primary & disaster recovery database:
+This is a collection of modules that make it easier to provision cloudant instance and assign service prolicy:
 * [instance](modules/instance)
-* [database](modules/config-database)
 
 ## Compatibility
 
