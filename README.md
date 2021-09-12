@@ -1,6 +1,6 @@
 # IBM Cloud Cloudant - Terraform Module
 
-This is a collection of modules that make it easier to provision cloudant instance and assign service prolicy:
+This is a collection of modules that make it easier to provision cloudant instance and assign service policy:
 * [instance](modules/instance)
 
 ## Compatibility
@@ -9,7 +9,7 @@ This module is meant for use with Terraform 0.13 (and higher).
 
 ## Usage
 
-Full examples are in the [examples](./examples/) folder, but basic usage is as follows for creation of logdna instance & key:
+Full examples are in the [examples](./examples/) folder, but basic usage is as follows for creation of a Cloudant instance:
 
 ```hcl
 provider "ibm" {
@@ -79,7 +79,7 @@ or
 ```
 pip3 install pre-commit
 ```
-## How to input varaible values through a file
+## How to input variable values through a file
 
 To review the plan for the configuration defined (no resources actually provisioned)
 ```
