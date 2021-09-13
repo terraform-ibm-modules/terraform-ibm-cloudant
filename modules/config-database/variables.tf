@@ -13,6 +13,7 @@ variable "pri_resource_host" {
 variable "dr_resource_host" {
   description = "The host URL for the key"
   type        = string
+  default     = ""
 }
 
 variable "pri_resource_apikey" {
@@ -23,6 +24,7 @@ variable "pri_resource_apikey" {
 variable "dr_resource_apikey" {
   description = "The API key for the credentials"
   type        = string
+  default     = ""
 }
 
 variable "pri_resource_username" {
@@ -33,6 +35,7 @@ variable "pri_resource_username" {
 variable "dr_resource_username" {
   description = "The username for the key"
   type        = string
+  default     = ""
 }
 
 variable "pri_resource_password" {
@@ -43,6 +46,7 @@ variable "pri_resource_password" {
 variable "dr_resource_password" {
   description = "The password for the key"
   type        = string
+  default     = ""
 }
 
 variable "db_name" {
