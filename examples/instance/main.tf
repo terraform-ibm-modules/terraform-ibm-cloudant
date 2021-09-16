@@ -41,8 +41,8 @@ module "cloudant-instance" {
   ###################
   # Service Policy
   ###################
-  service_policy_provision = var.service_policy_provision
-  service_name             = var.service_name
-  description              = var.description
-  roles                    = var.roles
+  #service_policy_provision = var.service_policy_provision
+  #service_name             = var.service_name
+  #description              = var.description
+  #roles                    = var.roles
 }

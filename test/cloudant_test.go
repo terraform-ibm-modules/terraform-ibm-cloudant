@@ -21,11 +21,6 @@ func TestAccIBMCloudantE2ETest(t *testing.T) {
 	// resource group
 	expectedResourceGroup := "default"
 
-	roles := []string{"Writer"}
-
-	// Unique name for an instance so we can distinguish it from any other service name
-	expectedServiceName := fmt.Sprintf("terratest-servicename-%s", strings.ToLower(random.UniqueId()))
-
 	// Construct the terraform options with default retryable errors to handle the most common retryable errors in
 	// terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
@@ -33,15 +28,12 @@ func TestAccIBMCloudantE2ETest(t *testing.T) {
 		TerraformDir: "../examples/e2e",
 
 		Vars: map[string]interface{}{
-			"instance_name":            expectedInstanceName,
-			"plan":                     "standard",
-			"resource_group":           expectedResourceGroup,
-			"region":                   "us-east",
-			"resource_key_name":        expectedResourceKeyName,
-			"role":                     "Writer",
-			"roles":                    roles,
-			"service_name":             expectedServiceName,
-			"service_policy_provision": true,
+			"instance_name":     expectedInstanceName,
+			"plan":              "standard",
+			"resource_group":    expectedResourceGroup,
+			"region":            "us-east",
+			"resource_key_name": expectedResourceKeyName,
+			"role":              "Writer",
 		},
 	})
 

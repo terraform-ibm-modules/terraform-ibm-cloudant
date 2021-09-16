@@ -29,14 +29,6 @@ module "cloudant-instance-pri" {
   resource_key_name      = var.pri_resource_key
   role                   = var.role
   resource_key_tags      = var.resource_key_tags
-
-  ###################
-  # Service Policy
-  ###################
-  service_policy_provision = var.service_policy_provision
-  service_name             = var.service_name
-  description              = var.description
-  roles                    = var.roles
 }
 .....
 
@@ -61,8 +53,5 @@ module "cloudant-instance-pri" {
 | create_timeout           | Timeout duration for create                                      | string       | n/a     | no       |
 | update_timeout           | Timeout duration for update                                      | string       | n/a     | no       |
 | delete_timeout           | Timeout duration for delete                                      | string       | n/a     | no       |
-| service_policy_provision | Indicating to provision service policy                           | bool         | true    | no       |
-| service\_name            | A descriptive name used to identify the resource instance        | string       | n/a     | yes      |
-| description              | Description to service ID                                        | string       | n/a     | no       |
 
 NOTE: We can set the create, update and delete timeouts as string. For e.g say we want to set 15 minutes timeout then the value should be "15m".

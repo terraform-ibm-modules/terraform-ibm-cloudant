@@ -43,7 +43,7 @@ output "cloudant_key_apikey" {
   value       = var.provision_resource_key ? concat(ibm_resource_key.resource_key.*.credentials.apikey, [""])[0] : concat(data.ibm_resource_key.cloudant_resource_key.*.credentials.apikey, [""])[0]
 }
 
-
+/*
 #####################################################
 # Service Policy
 #####################################################
@@ -62,3 +62,4 @@ output "cloudant_service_policy_id" {
   description = "The ID of the service policy"
   value       = ibm_iam_service_policy.policy.id
 }
+*/
