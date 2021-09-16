@@ -51,7 +51,7 @@ data "ibm_resource_key" "cloudant_resource_key" {
 }
 
 
-
+/*
 #####################################################
 # Service Policy Configuration
 #####################################################
@@ -77,3 +77,4 @@ resource "ibm_iam_service_policy" "policy" {
     resource_instance_id = var.provision == true ? ibm_resource_instance.cloudant_instance.0.id : data.ibm_resource_instance.cloudant.0.id
   }
 }
+*/

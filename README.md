@@ -40,14 +40,6 @@ module "cloudant-instance" {
   resource_key_name       = var.resource_key_name
   role                    = var.role
   resource_key_tags       = var.resource_key_tags
-
-  ###################
-  # Service Policy
-  ###################
-  service_policy_provision = var.service_policy_provision
-  service_name             = var.service_name
-  description              = var.description
-  roles                    = var.roles
 }
 
 ```

@@ -88,6 +88,7 @@ variable "resource_key_tags" {
   default     = null
 }
 
+/*
 #####################################################
 # Service Policy Configuration
 #####################################################
@@ -111,3 +112,4 @@ variable "roles" {
   description = "service policy roles"
   type        = list(string)
 }
+*/
