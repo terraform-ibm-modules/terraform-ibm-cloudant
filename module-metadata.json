@@ -1,0 +1,385 @@
+{
+  "path": ".",
+  "variables": {
+    "access_tags": {
+      "name": "access_tags",
+      "type": "list(string)",
+      "description": "List of access tags to be associated with the Cloudant instance",
+      "default": [],
+      "source": [
+        "ibm_resource_tag.access_tags.count",
+        "ibm_resource_tag.access_tags.tags"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 46
+      },
+      "min_length": 1,
+      "max_length": 128,
+      "matches": "^[A-Za-z0-9:_ .-]+$",
+      "computed": true,
+      "elem": {
+        "type": "TypeString"
+      }
+    },
+    "capacity": {
+      "name": "capacity",
+      "type": "number",
+      "description": "Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan.",
+      "default": 1,
+      "source": [
+        "ibm_cloudant.cloudant_instance.capacity"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 40
+      }
+    },
+    "database_config": {
+      "name": "database_config",
+      "type": "list(object({\n    db          = string\n    partitioned = optional(bool)\n    shards      = optional(number)\n  }))",
+      "description": "(Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance",
+      "default": [],
+      "source": [
+        "ibm_cloudant_database.cloudant_database.count",
+        "ibm_cloudant_database.cloudant_database.db",
+        "ibm_cloudant_database.cloudant_database.partitioned",
+        "ibm_cloudant_database.cloudant_database.shards"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 75
+      }
+    },
+    "environment_crn": {
+      "name": "environment_crn",
+      "type": "string",
+      "description": "Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance",
+      "source": [
+        "ibm_cloudant.cloudant_instance.environment_crn"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 58
+      },
+      "immutable": true
+    },
+    "include_data_events": {
+      "name": "include_data_events",
+      "type": "bool",
+      "description": "Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker.",
+      "default": false,
+      "source": [
+        "ibm_cloudant.cloudant_instance.include_data_events"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 34
+      }
+    },
+    "instance_name": {
+      "name": "instance_name",
+      "type": "string",
+      "description": "The name of the Cloudant instance",
+      "required": true,
+      "source": [
+        "ibm_cloudant.cloudant_instance.name"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 23
+      }
+    },
+    "legacy_credentials": {
+      "name": "legacy_credentials",
+      "type": "bool",
+      "description": "Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials.",
+      "default": false,
+      "source": [
+        "ibm_cloudant.cloudant_instance.legacy_credentials"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 28
+      },
+      "immutable": true
+    },
+    "plan": {
+      "name": "plan",
+      "type": "string",
+      "description": "The plan for the Cloudant instance. Standard or lite.",
+      "default": "standard",
+      "required": true,
+      "source": [
+        "ibm_cloudant.cloudant_instance.plan"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 7
+      }
+    },
+    "region": {
+      "name": "region",
+      "type": "string",
+      "description": "The IBM Cloud region where the Cloudant instance will be provisioned.",
+      "default": "us-south",
+      "required": true,
+      "source": [
+        "ibm_cloudant.cloudant_instance.location"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 1
+      },
+      "cloud_data_type": "region",
+      "immutable": true
+    },
+    "resource_group_id": {
+      "name": "resource_group_id",
+      "type": "string",
+      "description": "The Id of an existing IBM Cloud resource group where the instance will be grouped.",
+      "required": true,
+      "source": [
+        "ibm_cloudant.cloudant_instance.resource_group_id"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 18
+      },
+      "cloud_data_type": "resource_group",
+      "immutable": true,
+      "computed": true
+    },
+    "service_endpoints": {
+      "name": "service_endpoints",
+      "type": "string",
+      "description": "Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private'",
+      "default": "public-and-private",
+      "source": [
+        "ibm_cloudant.cloudant_instance.service_endpoints"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 64
+      },
+      "computed": true
+    },
+    "tags": {
+      "name": "tags",
+      "type": "list(string)",
+      "description": "List of tags to be associated to cloudant instance",
+      "default": [],
+      "source": [
+        "ibm_cloudant.cloudant_instance.tags"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 52
+      },
+      "cloud_data_type": "tags",
+      "computed": true,
+      "elem": {
+        "type": "TypeString"
+      }
+    }
+  },
+  "outputs": {
+    "capacity": {
+      "name": "capacity",
+      "description": "A number of blocks of throughput units",
+      "value": "ibm_cloudant.cloudant_instance.capacity",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 45
+      },
+      "type": "TypeInt"
+    },
+    "crn": {
+      "name": "crn",
+      "description": "CRN of the resource instance",
+      "value": "ibm_cloudant.cloudant_instance.crn",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 25
+      },
+      "type": "TypeString",
+      "cloud_data_type": "crn"
+    },
+    "db_map": {
+      "name": "db_map",
+      "description": "A map of the Cloudant database names created and their respective IDs",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 65
+      }
+    },
+    "instance_guid": {
+      "name": "instance_guid",
+      "description": "Global identifier of the cloudant instance created",
+      "value": "ibm_cloudant.cloudant_instance.guid",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 15
+      },
+      "type": "TypeString"
+    },
+    "instance_id": {
+      "name": "instance_id",
+      "description": "The id of the cloudant instance created",
+      "value": "ibm_cloudant.cloudant_instance.id",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 10
+      }
+    },
+    "instance_name": {
+      "name": "instance_name",
+      "description": "Name of the cloudant instance",
+      "value": "ibm_cloudant.cloudant_instance.name",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 5
+      },
+      "type": "TypeString"
+    },
+    "instance_url": {
+      "name": "instance_url",
+      "description": "The dashboard URL to access resource",
+      "value": "ibm_cloudant.cloudant_instance.dashboard_url",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 30
+      },
+      "type": "TypeString"
+    },
+    "plan": {
+      "name": "plan",
+      "description": "The plan used to create cloudant instance",
+      "value": "ibm_cloudant.cloudant_instance.plan",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 20
+      },
+      "type": "TypeString"
+    },
+    "private_endpoint": {
+      "name": "private_endpoint",
+      "description": "The external private endpoint",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 60
+      }
+    },
+    "public_endpoint": {
+      "name": "public_endpoint",
+      "description": "The external public endpoint",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 55
+      }
+    },
+    "resource_group_name": {
+      "name": "resource_group_name",
+      "description": "The resource group name in which resource is provisioned",
+      "value": "ibm_cloudant.cloudant_instance.resource_group_name",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 35
+      },
+      "type": "TypeString"
+    },
+    "resource_keys_url": {
+      "name": "resource_keys_url",
+      "description": "The relative path to the resource keys for the instance",
+      "value": "ibm_cloudant.cloudant_instance.resource_keys_url",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 50
+      },
+      "type": "TypeString"
+    },
+    "state": {
+      "name": "state",
+      "description": "The current state of the instance",
+      "value": "ibm_cloudant.cloudant_instance.state",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 40
+      },
+      "type": "TypeString"
+    }
+  },
+  "required_core": [
+    "\u003e= 1.0.0"
+  ],
+  "required_providers": {
+    "ibm": {
+      "source": "IBM-Cloud/ibm",
+      "version_constraints": [
+        "\u003e= 1.56.1, \u003c 2.0.0"
+      ]
+    }
+  },
+  "managed_resources": {
+    "ibm_cloudant.cloudant_instance": {
+      "mode": "managed",
+      "type": "ibm_cloudant",
+      "name": "cloudant_instance",
+      "attributes": {
+        "capacity": "capacity",
+        "environment_crn": "environment_crn",
+        "include_data_events": "include_data_events",
+        "legacy_credentials": "legacy_credentials",
+        "location": "region",
+        "name": "instance_name",
+        "plan": "plan",
+        "resource_group_id": "resource_group_id",
+        "service_endpoints": "service_endpoints",
+        "tags": "tags"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 4
+      }
+    },
+    "ibm_cloudant_database.cloudant_database": {
+      "mode": "managed",
+      "type": "ibm_cloudant_database",
+      "name": "cloudant_database",
+      "attributes": {
+        "count": "database_config",
+        "db": "database_config",
+        "partitioned": "database_config",
+        "shards": "database_config"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 48
+      }
+    },
+    "ibm_resource_tag.access_tags": {
+      "mode": "managed",
+      "type": "ibm_resource_tag",
+      "name": "access_tags",
+      "attributes": {
+        "count": "access_tags",
+        "tags": "access_tags"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 37
+      }
+    }
+  },
+  "data_resources": {},
+  "module_calls": {}
+}

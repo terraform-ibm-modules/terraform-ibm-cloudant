@@ -1,0 +1,6 @@
+_extends: repo-settings:.github/common-settings-v2.yml
+
+repository:
+  name: "terraform-ibm-cloudant-module"
+  description: "Deploys and configures an IBM Cloud Cloudant instance"
+  topics: terraform-module, graduated
