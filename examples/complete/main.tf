@@ -102,19 +102,21 @@ module "secrets_manager_group" {
   secret_group_description = "service secret-group"
 }
 
+# Note: Source need to be updated after migrating iam-serviceid-apikey-secrets-manager-module to public. Internal issue is being tracked here: https://github.ibm.com/GoldenEye/issues/issues/6299
+
 ##################################################################
 ## Configure Secret Manager to generate and rotate API Key for the Service ID created above
 ##################################################################
 
-module "dynamic_cloudant_serviceid_apikey" {
-  source                               = "git::https://github.ibm.com/GoldenEye/iam-serviceid-apikey-secrets-manager-module?ref=2.0.1"
-  region                               = local.sm_region
-  sm_iam_secret_name                   = "${var.prefix}-cloudant"
-  sm_iam_secret_description            = "Dynamic IAM secret / apikey"
-  serviceid_id                         = ibm_iam_service_id.cloudant_manager.id
-  secrets_manager_guid                 = local.sm_guid
-  secret_group_id                      = module.secrets_manager_group.secret_group_id
-  sm_iam_secret_auto_rotation          = true
-  sm_iam_secret_auto_rotation_interval = 85
-  sm_iam_secret_auto_rotation_unit     = "day"
-}
+#module "dynamic_cloudant_serviceid_apikey" {
+#  source                               = "git::https://github.ibm.com/GoldenEye/iam-serviceid-apikey-secrets-manager-module?ref=2.0.1"
+#  region                               = local.sm_region
+#  sm_iam_secret_name                   = "${var.prefix}-cloudant"
+#  sm_iam_secret_description            = "Dynamic IAM secret / apikey"
+#  serviceid_id                         = ibm_iam_service_id.cloudant_manager.id
+#  secrets_manager_guid                 = local.sm_guid
+#  secret_group_id                      = module.secrets_manager_group.secret_group_id
+#  sm_iam_secret_auto_rotation          = true
+#  sm_iam_secret_auto_rotation_interval = 85
+#  sm_iam_secret_auto_rotation_unit     = "day"
+#}
