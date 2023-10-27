@@ -7,7 +7,7 @@
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
 
-This module supports creating a cloudant instance on a multi-tenant environment with standard or lite plan, or a standard plan cloudant instance with on a dedicated environment.
+This module supports provisioning a instance of the IBM Cloudant service. With a Lite plan, the instance is provisioned on a multi-tenant environment. With a standard plan, the instance can be provisioned either on a multi-tenant or on a dedicated environment. For more information, see [Plans and provisioning](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public).
 
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
