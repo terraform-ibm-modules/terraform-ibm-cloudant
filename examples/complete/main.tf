@@ -102,6 +102,8 @@ module "secrets_manager_group" {
   secret_group_description = "service secret-group"
 }
 
+# The following code block will be updated when the "iam-serviceid-apikey-secrets-manager-module" moves to TIM org.
+
 ##################################################################
 ## Configure Secret Manager to generate and rotate API Key for the Service ID created above
 ##################################################################
