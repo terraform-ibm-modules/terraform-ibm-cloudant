@@ -2,5 +2,5 @@ _extends: repo-settings:.github/iac-onepipeline-settings.yaml
 
 repository:
   name: "terraform-ibm-cloudant"
-  description: "Deploys and configures an IBM Cloud Cloudant instance"
+  description: "Deploys and configures an IBM Cloudant instance"
   topics: terraform-module, graduated, core-team, supported, cloudant
