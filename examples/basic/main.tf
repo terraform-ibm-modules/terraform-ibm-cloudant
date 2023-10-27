@@ -1,6 +1,6 @@
-########################################################################################################################
-# Resource group
-########################################################################################################################
+##############################################################################
+# Resource Group
+##############################################################################
 
 module "resource_group" {
   source  = "terraform-ibm-modules/resource-group/ibm"
@@ -10,15 +10,20 @@ module "resource_group" {
   existing_resource_group_name = var.resource_group
 }
 
-########################################################################################################################
-# COS instance
-########################################################################################################################
+##############################################################################
+# Basic cloudant instance + database
+##############################################################################
 
-resource "ibm_resource_instance" "cos_instance" {
-  name              = "${var.prefix}-cos"
+module "create_cloudant" {
+  source            = "../.."
   resource_group_id = module.resource_group.resource_group_id
-  service           = "cloud-object-storage"
-  plan              = "standard"
-  location          = "global"
+  instance_name     = "${var.prefix}-testinstance"
+  access_tags       = var.access_tags
+  region            = var.region
   tags              = var.resource_tags
+  database_config = [{
+    db          = "cloudant-db"
+    partitioned = false
+    shards      = 16
+  }]
 }
