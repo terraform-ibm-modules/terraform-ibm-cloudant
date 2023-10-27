@@ -1,8 +1,7 @@
 # Cloudant Module
 
-[![Certified](<https://img.shields.io/badge/Status-Certified%20(GA)-brightgreen?style=plastic>)](https://github.ibm.com/GoldenEye/documentation/blob/master/status.md)
-[![latest release](https://shields-server.m03l6u0cqkx.eu-de.codeengine.appdomain.cloud/github/v/release/GoldenEye/cloudant-module?logo=GitHub)](https://github.ibm.com/GoldenEye/cloudant-module/releases/latest)
-[![CI](https://img.shields.io/badge/CI-Toolchain%20Tekton%20Pipeline-3662FF?logo=ibm)](https://cloud.ibm.com/devops/toolchains/c3916535-165a-4275-9b1f-c58575839951?env_id=ibm:yp:us-south)
+[![Graduated (Supported)](https://img.shields.io/badge/Status-Graduated%20(Supported)-brightgreen)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-cloudant?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/releases/latest)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
@@ -20,18 +19,6 @@ This module supports creating a cloudant instance on a multi-tenant environment 
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
-## Compliance and security
-This module implements the following NIST controls on the network layer. For more information about how this module implements the controls in the following list, see [NIST controls](docs/controls.md).
-
-|Profile|Category|ID|Description|
-|---|---|---|---|
-|NIST|AC-4|AC-4|Enforce approved authorizations  for controlling the flow of information within the system.|
-|NIST|AC-6|AC-6(9)|Log the execution of privileged functions.|
-|NIST|AU-12|AU-12(a)| System should be capable of logging in support of the audit function.|
-|NIST|SC-7|SC-7(3)|Limit the number of external network connections to the system.|
-|NIST|SC-8|SC-8|Protect the confidentiality and integrity of data during transmission.|
-|NIST|SC-28|SC-28|Protect the information at rest.|
-
 ## cloudant-module
 
 ### Usage
@@ -40,8 +27,9 @@ This module implements the following NIST controls on the network layer. For mor
 
 ```hcl
 module "cloudant" {
-  # Replace "X.X.X" with a GIT release version to lock into a specific release
-  source            = "git::https://github.ibm.com/GoldenEye/cloudant-module.git?ref=X.X.X"
+  source           = "terraform-ibm-modules/terraform-ibm-cloudant/ibm"
+  version          = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
+  source            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-cloudant.git?ref=X.X.X"
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
   instance_name     = "my-cloudant-instance"
 }
@@ -51,8 +39,8 @@ module "cloudant" {
 
 ```hcl
 module "cloudant" {
-  # Replace "X.X.X" with a GIT release version to lock into a specific release
-  source            = "git::https://github.ibm.com/GoldenEye/cloudant-module.git?ref=X.X.X"
+  source           = "terraform-ibm-modules/terraform-ibm-cloudant/ibm"
+  version          = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
   instance_name     = "dedicated-cloudant-instance"
   environment_crn   = "crn:<...>" # CRN of dedicated environment
@@ -125,10 +113,13 @@ No modules.
 | <a name="output_state"></a> [state](#output\_state) | The current state of the instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-
+<!-- BEGIN CONTRIBUTING HOOK -->
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
 ## Contributing
 
-You can report issues and request features for this module in the GoldenEye [issues](https://github.ibm.com/GoldenEye/issues) repo.See [Report a Bug or Create Enhancement Request](https://github.ibm.com/GoldenEye/documentation/blob/master/issues.md).
+You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
 
-To set up your local development environment, see [Local development setup](https://github.ibm.com/GoldenEye/documentation/blob/master/local-dev-setup.md) in the project documentation.
+To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
+
+<!-- Source for this readme file: https://github.com/terraform-ibm-modules/common-dev-assets/tree/main/module-assets/ci/module-template-automation -->
+<!-- END CONTRIBUTING HOOK -->
