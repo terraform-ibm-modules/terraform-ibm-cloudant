@@ -27,9 +27,8 @@ This module supports creating a cloudant instance on a multi-tenant environment 
 
 ```hcl
 module "cloudant" {
-  source           = "terraform-ibm-modules/terraform-ibm-cloudant/ibm"
-  version          = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
-  source            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-cloudant.git?ref=X.X.X"
+  source            = "terraform-ibm-modules/cloudant/ibm"
+  version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
   instance_name     = "my-cloudant-instance"
 }
@@ -39,8 +38,8 @@ module "cloudant" {
 
 ```hcl
 module "cloudant" {
-  source           = "terraform-ibm-modules/terraform-ibm-cloudant/ibm"
-  version          = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
+  source            = "terraform-ibm-modules/cloudant/ibm"
+  version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
   resource_group_id = "xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX"
   instance_name     = "dedicated-cloudant-instance"
   environment_crn   = "crn:<...>" # CRN of dedicated environment
@@ -113,13 +112,9 @@ No modules.
 | <a name="output_state"></a> [state](#output\_state) | The current state of the instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-<!-- BEGIN CONTRIBUTING HOOK -->
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
 ## Contributing
 
 You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
 
 To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
-
-<!-- Source for this readme file: https://github.com/terraform-ibm-modules/common-dev-assets/tree/main/module-assets/ci/module-template-automation -->
-<!-- END CONTRIBUTING HOOK -->
