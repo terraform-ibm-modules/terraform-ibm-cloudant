@@ -17,11 +17,6 @@ output "instance_guid" {
   value       = module.create_cloudant.instance_guid
 }
 
-output "plan" {
-  description = "The plan used to create cloudant instance"
-  value       = module.create_cloudant.plan
-}
-
 output "crn" {
   description = "CRN of the resource instance"
   value       = module.create_cloudant.crn
@@ -50,16 +45,6 @@ output "capacity" {
 output "resource_keys_url" {
   description = "The relative path to the resource keys for the instance"
   value       = module.create_cloudant.resource_keys_url
-}
-
-output "public_endpoint" {
-  description = "The external public endpoint"
-  value       = module.create_cloudant.public_endpoint
-}
-
-output "private_endpoint" {
-  description = "The external private endpoint"
-  value       = module.create_cloudant.private_endpoint
 }
 
 output "db_map" {
