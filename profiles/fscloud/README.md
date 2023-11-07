@@ -2,13 +2,9 @@
 
 This code is a version of the [parent root module](../../) that includes a default configuration that complies with the relevant controls from the [IBM Cloud Framework for Financial Services](https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-about). See the [Example for IBM Cloud Framework for Financial Services](/examples/fscloud/) for logic that uses this module.
 
-:exclamation: **Exception:** The Databases for PostgreSQL DB service is not yet Financial services validated. Therefore, the infrastructure that is deployed by this module is also not validated with the Framework for Financial Services. For more information, see the list of [Financial Services Validated services](https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-vpc-architecture-about#financial-services-validated-services).
+:exclamation: **Exception:** The Cloudant DB service is not yet Financial services validated. Therefore, the infrastructure that is deployed by this module is also not validated with the Framework for Financial Services. For more information, see the list of [Financial Services Validated services]( https://cloud.ibm.com/docs/framework-financial-services?topic=framework-financial-services-vpc-architecture-about#financial-services-validated-services).
 
-The default values in this profile were scanned by [IBM Code Risk Analyzer (CRA)](https://cloud.ibm.com/docs/code-risk-analyzer-cli-plugin?topic=code-risk-analyzer-cli-plugin-cra-cli-plugin#terraform-command) for compliance with the IBM Cloud Framework for Financial Services profile that is specified by the IBM Security and Compliance Center. The scan passed for all applicable goals with one exception:
-
-> rule-beb7b289-706b-4dc0-b01d-b1d15d4331e3: Check whether Databases for PostgreSQL network access is restricted to a specific IP range.
-
-The IBM Cloud Framework for Financial Services mandates the application of an inbound network-based allowlist in front of the IBM Cloud Databases for (ICD) PostgreSQL instance. You can comply with this requirement by using the `cbr_rules` variable in the module, which can be used to create a narrow context-based restriction rule that is scoped to the PostgreSQL instance. CRA does not currently support checking for context-based restrictions, so you can ignore the failing rule after you set the context-based restriction.
+The default values in this profile were scanned by [IBM Code Risk Analyzer (CRA)](https://cloud.ibm.com/docs/code-risk-analyzer-cli-plugin?topic=code-risk-analyzer-cli-plugin-cra-cli-plugin#terraform-command) for compliance with the IBM Cloud Framework for Financial Services profile that is specified by the IBM Security and Compliance Center. The scan passed for all applicable goals.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
@@ -34,6 +30,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | List of access tags to be associated with the Cloudant instance | `list(string)` | `[]` | no |
 | <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
+| <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br>    db          = string<br>    partitioned = optional(bool)<br>    shards      = optional(number)<br>  }))</pre> | `[]` | no |
 | <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance | `string` | `null` | no |
 | <a name="input_include_data_events"></a> [include\_data\_events](#input\_include\_data\_events) | Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker. | `bool` | `false` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | The name of the Cloudant instance | `string` | n/a | yes |
