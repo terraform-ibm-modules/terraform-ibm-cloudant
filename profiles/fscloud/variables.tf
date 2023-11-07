@@ -71,3 +71,14 @@ variable "service_endpoints" {
     error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
   }
 }
+
+variable "database_config" {
+  type = list(object({
+    db          = string
+    partitioned = optional(bool)
+    shards      = optional(number)
+  }))
+
+  description = "(Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance"
+  default     = []
+}
