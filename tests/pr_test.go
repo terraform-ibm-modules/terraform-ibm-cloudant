@@ -67,6 +67,7 @@ func TestRunFSCloudExample(t *testing.T) {
 	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: "examples/fscloud",
+		Prefix:       "fscloud",
 		Region:       "us-south", // For FSCloud locking into us-south since that is where the HPCS permanent instance is
 		/*
 		 Comment out the 'ResourceGroup' input to force this tests to create a unique resource group to ensure tests do
