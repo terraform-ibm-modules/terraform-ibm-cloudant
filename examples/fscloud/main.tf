@@ -41,12 +41,21 @@ resource "ibm_is_vpc" "vpc" {
   tags                        = var.resource_tags
 }
 
+resource "ibm_is_vpc_address_prefix" "dedicated_cloudant_address_prefix" {
+  name = "${var.prefix}-dedicated-cloudant-address-prefixes"
+  zone = "${var.region}-1"
+  vpc  = ibm_is_vpc.vpc.id
+  cidr = "10.10.40.0/24"
+}
+
 resource "ibm_is_subnet" "subnet" {
-  name           = "${var.prefix}-subnet-1"
-  vpc            = module.resource_group.resource_group_id
-  resource_group = var.resource_group
-  zone           = "${var.region}-1"
-  tags           = var.resource_tags
+  depends_on      = [ibm_is_vpc_address_prefix.dedicated_cloudant_address_prefix]
+  name            = "${var.prefix}-subnet-1"
+  vpc             = ibm_is_vpc.vpc.id
+  ipv4_cidr_block = "10.10.40.0/24"
+  resource_group  = module.resource_group.resource_group_id
+  zone            = "${var.region}-1"
+  tags            = var.resource_tags
 }
 
 resource "ibm_is_virtual_endpoint_gateway" "cloudant_endpoint" {
