@@ -5,7 +5,7 @@ An end-to-end example that uses the [Profile for IBM Cloud Framework for Financi
 The example uses the IBM Cloud Terraform provider to create the following infrastructure:
 
 - A resource group, if one is not passed in.
-- A cloudant instance
+- A dedicated cloudant instance
 - A basic database in the Cloudant instance
 - Creates a VPC and a VPE to the newly created cloudant instance
 
