@@ -22,13 +22,9 @@ module "create_cloudant" {
   region            = var.region
   tags              = var.resource_tags
   plan              = "standard"
-  service_endpoints = "private"
-  environment_crn   = "crn:v1:bluemix:public:cloudantnosqldb:us-south:a/abac0df06b644a9cabc6e44f55b3880e:7c88e3f2-4412-4f45-b613-bae10b1e103c::"
-  database_config = [{
-    db          = "cloudant-db"
-    partitioned = false
-    shards      = 16
-  }]
+  service_endpoints = var.service_endpoints
+  environment_crn   = var.environment_crn
+  database_config   = var.database_config
 }
 
 ##############################################################################

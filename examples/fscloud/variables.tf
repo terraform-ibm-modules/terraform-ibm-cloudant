@@ -33,3 +33,39 @@ variable "resource_tags" {
   description = "Optional list of tags to be added to created resources"
   default     = []
 }
+
+variable "service_endpoints" {
+  type        = string
+  description = "Sets the endpoint of the Key Protect instance, valid values are 'public', 'private', or 'public-and-private'"
+  default     = "private"
+
+  validation {
+    condition     = can(regex("public|public-and-private|private", var.service_endpoints))
+    error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
+  }
+}
+
+variable "database_config" {
+  type = list(object({
+    db          = string
+    partitioned = optional(bool)
+    shards      = optional(number)
+  }))
+
+  description = "(Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance"
+  default = [{
+    db          = "cloudant-dedicated-db"
+    partitioned = false
+    shards      = 16
+  }]
+}
+
+variable "environment_crn" {
+  description = "CRN of the IBM Cloudant Dedicated Hardware plan instance"
+  type        = string
+
+  validation {
+    condition     = length(var.environment_crn) > 0
+    error_message = "Dedicated environment CRN is required to create a standard cloudant instance."
+  }
+}

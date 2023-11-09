@@ -78,6 +78,8 @@ func TestRunFSCloudExample(t *testing.T) {
 		//ResourceGroup: resourceGroup,
 		TerraformVars: map[string]interface{}{
 			"access_tags": permanentResources["accessTags"],
+			// crn of the dedicated host
+			"environment_crn": permanentResources["dedicatedHostCrn"],
 		},
 	})
 	output, err := options.RunTestConsistency()
