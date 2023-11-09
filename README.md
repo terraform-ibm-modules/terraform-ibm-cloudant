@@ -12,6 +12,8 @@ This module supports provisioning a instance of the IBM Cloudant service. With a
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
 * [terraform-ibm-cloudant](#terraform-ibm-cloudant)
+* [Submodules](./modules)
+    * [fscloud](./modules/fscloud)
 * [Examples](./examples)
     * [Basic cloudant instance and database creation](./examples/basic)
     * [Cloudant instance and database creation on dedicated host](./examples/dedicated-cloudant)

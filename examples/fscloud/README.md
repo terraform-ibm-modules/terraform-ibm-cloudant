@@ -1,6 +1,6 @@
 # Financial Services Cloud profile example
 
-An end-to-end example that uses the [Profile for IBM Cloud Framework for Financial Services](../../profiles/fscloud/) to deploy a Cloudant instance.
+An end-to-end example that uses the [Profile for IBM Cloud Framework for Financial Services](../../modules/fscloud/) to deploy a Cloudant instance.
 
 The example uses the IBM Cloud Terraform provider to create the following infrastructure:
 
