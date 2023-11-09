@@ -16,7 +16,6 @@ This module supports provisioning a instance of the IBM Cloudant service. With a
     * [fscloud](./modules/fscloud)
 * [Examples](./examples)
     * [Basic cloudant instance and database creation](./examples/basic)
-    * [Cloudant instance and database creation on dedicated host](./examples/dedicated-cloudant)
     * [Cloudant instance, access controls, and rotation of credentials through Secret Manager](./examples/complete)
     * [Financial Services Cloud profile example](./examples/fscloud)
 * [Contributing](#contributing)

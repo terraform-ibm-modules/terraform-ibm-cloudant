@@ -52,22 +52,3 @@ func TestRunBasicExampleSchematics(t *testing.T) {
 	err := options.RunSchematicTest()
 	assert.NoError(t, err, "Schematic Test had unexpected error")
 }
-
-func TestRunDedicatedExample(t *testing.T) {
-	t.Parallel()
-
-	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
-		Testing:       t,
-		TerraformDir:  "examples/dedicated-cloudant",
-		Prefix:        "cloudant",
-		ResourceGroup: resourceGroup,
-		TerraformVars: map[string]interface{}{
-			// crn of the dedicated host
-			"environment_crn": permanentResources["dedicatedHostCrn"],
-		},
-	})
-
-	output, err := options.RunTestConsistency()
-	assert.Nil(t, err, "This should not have errored")
-	assert.NotNil(t, output, "Expected some output")
-}

@@ -21,6 +21,9 @@ module "create_cloudant" {
   access_tags       = var.access_tags
   region            = var.region
   tags              = var.resource_tags
+  plan              = "standard"
+  service_endpoints = "private"
+  environment_crn   = "crn:v1:bluemix:public:cloudantnosqldb:us-south:a/abac0df06b644a9cabc6e44f55b3880e:7c88e3f2-4412-4f45-b613-bae10b1e103c::"
   database_config = [{
     db          = "cloudant-db"
     partitioned = false
@@ -41,15 +44,15 @@ resource "ibm_is_vpc" "vpc" {
   tags                        = var.resource_tags
 }
 
-resource "ibm_is_vpc_address_prefix" "dedicated_cloudant_address_prefix" {
-  name = "${var.prefix}-dedicated-cloudant-address-prefixes"
+resource "ibm_is_vpc_address_prefix" "fscloud_cloudant_address_prefix" {
+  name = "${var.prefix}-fscloud-cloudant-address-prefixes"
   zone = "${var.region}-1"
   vpc  = ibm_is_vpc.vpc.id
   cidr = "10.10.40.0/24"
 }
 
 resource "ibm_is_subnet" "subnet" {
-  depends_on      = [ibm_is_vpc_address_prefix.dedicated_cloudant_address_prefix]
+  depends_on      = [ibm_is_vpc_address_prefix.fscloud_cloudant_address_prefix]
   name            = "${var.prefix}-subnet-1"
   vpc             = ibm_is_vpc.vpc.id
   ipv4_cidr_block = "10.10.40.0/24"
