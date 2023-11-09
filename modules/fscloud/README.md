@@ -12,7 +12,7 @@ The default values in this profile were scanned by [IBM Code Risk Analyzer (CRA)
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.6.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.56.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.56.1, < 2.0.0 |
 
 ### Modules
 
@@ -29,16 +29,14 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | List of access tags to be associated with the Cloudant instance | `list(string)` | `[]` | no |
-| <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
+| <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. | `number` | `1` | no |
 | <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br>    db          = string<br>    partitioned = optional(bool)<br>    shards      = optional(number)<br>  }))</pre> | `[]` | no |
-| <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance | `string` | `null` | no |
+| <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance | `string` | n/a | yes |
 | <a name="input_include_data_events"></a> [include\_data\_events](#input\_include\_data\_events) | Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker. | `bool` | `false` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | The name of the Cloudant instance | `string` | n/a | yes |
 | <a name="input_legacy_credentials"></a> [legacy\_credentials](#input\_legacy\_credentials) | Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. | `bool` | `false` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. Standard or lite. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the instance will be grouped. | `string` | n/a | yes |
-| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private' | `string` | `"public-and-private"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | List of tags to be associated to cloudant instance | `list(string)` | `[]` | no |
 
 ### Outputs
@@ -54,7 +52,6 @@ No resources.
 | <a name="output_instance_url"></a> [instance\_url](#output\_instance\_url) | The dashboard URL to access resource |
 | <a name="output_plan"></a> [plan](#output\_plan) | The plan used to create cloudant instance |
 | <a name="output_private_endpoint"></a> [private\_endpoint](#output\_private\_endpoint) | The external private endpoint |
-| <a name="output_public_endpoint"></a> [public\_endpoint](#output\_public\_endpoint) | The external public endpoint |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The resource group name in which resource is provisioned |
 | <a name="output_resource_keys_url"></a> [resource\_keys\_url](#output\_resource\_keys\_url) | The relative path to the resource keys for the instance |
 | <a name="output_state"></a> [state](#output\_state) | The current state of the instance |
