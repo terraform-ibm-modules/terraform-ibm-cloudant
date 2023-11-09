@@ -34,17 +34,6 @@ variable "resource_tags" {
   default     = []
 }
 
-variable "service_endpoints" {
-  type        = string
-  description = "Sets the endpoint of the Key Protect instance, valid values are 'public', 'private', or 'public-and-private'"
-  default     = "private"
-
-  validation {
-    condition     = can(regex("public|public-and-private|private", var.service_endpoints))
-    error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
-  }
-}
-
 variable "database_config" {
   type = list(object({
     db          = string

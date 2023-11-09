@@ -21,8 +21,6 @@ module "create_cloudant" {
   access_tags       = var.access_tags
   region            = var.region
   tags              = var.resource_tags
-  plan              = "standard"
-  service_endpoints = var.service_endpoints
   environment_crn   = var.environment_crn
   database_config   = var.database_config
 }

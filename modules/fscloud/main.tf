@@ -3,8 +3,8 @@ module "cloudant" {
   resource_group_id   = var.resource_group_id
   instance_name       = var.instance_name
   region              = var.region
-  plan                = var.plan
-  service_endpoints   = var.service_endpoints
+  plan                = "standard"
+  service_endpoints   = "private"
   tags                = var.tags
   access_tags         = var.access_tags
   capacity            = var.capacity

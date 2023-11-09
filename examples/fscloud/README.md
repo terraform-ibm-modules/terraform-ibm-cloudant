@@ -10,3 +10,7 @@ The example uses the IBM Cloud Terraform provider to create the following infras
 - Creates a VPC and a VPE to the newly created cloudant instance
 
 :exclamation: **Important:** In this example, only the Cloudant instance complies with the IBM Cloud Framework for Financial Services. Other parts of the infrastructure do not necessarily comply.
+
+## Before you begin
+
+* You need an IBM Cloudant Dedicated Hardware plan instance in order to provision the Cloudant instance in

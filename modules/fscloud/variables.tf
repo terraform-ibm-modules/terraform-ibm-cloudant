@@ -4,17 +4,6 @@ variable "region" {
   default     = "us-south"
 }
 
-variable "plan" {
-  type        = string
-  description = "The plan for the Cloudant instance. Standard or lite."
-  default     = "standard"
-
-  validation {
-    condition     = contains(["standard", "lite"], var.plan)
-    error_message = "Supported plans: standard or lite. Cloudant instance on dedicated host supports standard plan only."
-  }
-}
-
 variable "resource_group_id" {
   description = "The Id of an existing IBM Cloud resource group where the instance will be grouped."
   type        = string
@@ -39,7 +28,7 @@ variable "include_data_events" {
 
 variable "capacity" {
   type        = number
-  description = "Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan."
+  description = "Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity."
   default     = 1
 }
 
@@ -56,20 +45,8 @@ variable "tags" {
 }
 
 variable "environment_crn" {
-  description = "Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance"
+  description = "CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance"
   type        = string
-  default     = null
-}
-
-variable "service_endpoints" {
-  type        = string
-  description = "Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private'"
-  default     = "public-and-private"
-
-  validation {
-    condition     = can(regex("public|public-and-private|private", var.service_endpoints))
-    error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
-  }
 }
 
 variable "database_config" {

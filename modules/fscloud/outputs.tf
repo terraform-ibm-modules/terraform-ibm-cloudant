@@ -52,11 +52,6 @@ output "resource_keys_url" {
   value       = module.cloudant.resource_keys_url
 }
 
-output "public_endpoint" {
-  description = "The external public endpoint"
-  value       = module.cloudant.public_endpoint
-}
-
 output "private_endpoint" {
   description = "The external private endpoint"
   value       = module.cloudant.private_endpoint
