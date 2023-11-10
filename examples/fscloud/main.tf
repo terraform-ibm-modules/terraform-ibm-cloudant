@@ -11,19 +11,17 @@ module "resource_group" {
 }
 
 ##############################################################################
-# Standard Cloudant Instance with IAM authentication
+# FSCloud compliant cloudant instance + database
 ##############################################################################
 
 module "create_cloudant" {
-  source            = "../.."
+  source            = "../../modules/fscloud"
   resource_group_id = module.resource_group.resource_group_id
   instance_name     = "${var.prefix}-testinstance"
   access_tags       = var.access_tags
   region            = var.region
-  plan              = "standard"
   tags              = var.resource_tags
   environment_crn   = var.environment_crn
-  service_endpoints = var.service_endpoints
   database_config   = var.database_config
 }
 
@@ -40,12 +38,21 @@ resource "ibm_is_vpc" "vpc" {
   tags                        = var.resource_tags
 }
 
+resource "ibm_is_vpc_address_prefix" "fscloud_cloudant_address_prefix" {
+  name = "${var.prefix}-fscloud-cloudant-address-prefixes"
+  zone = "${var.region}-1"
+  vpc  = ibm_is_vpc.vpc.id
+  cidr = "10.10.40.0/24"
+}
+
 resource "ibm_is_subnet" "subnet" {
-  name           = "${var.prefix}-subnet-1"
-  vpc            = module.resource_group.resource_group_id
-  resource_group = var.resource_group
-  zone           = "${var.region}-1"
-  tags           = var.resource_tags
+  depends_on      = [ibm_is_vpc_address_prefix.fscloud_cloudant_address_prefix]
+  name            = "${var.prefix}-subnet-1"
+  vpc             = ibm_is_vpc.vpc.id
+  ipv4_cidr_block = "10.10.40.0/24"
+  resource_group  = module.resource_group.resource_group_id
+  zone            = "${var.region}-1"
+  tags            = var.resource_tags
 }
 
 resource "ibm_is_virtual_endpoint_gateway" "cloudant_endpoint" {

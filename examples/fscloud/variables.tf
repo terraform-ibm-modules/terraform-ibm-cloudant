@@ -19,7 +19,7 @@ variable "region" {
 variable "prefix" {
   type        = string
   description = "Prefix to append to all resources created by this example"
-  default     = "cloudant"
+  default     = "fs"
 }
 
 variable "access_tags" {
@@ -32,27 +32,6 @@ variable "resource_tags" {
   type        = list(string)
   description = "Optional list of tags to be added to created resources"
   default     = []
-}
-
-variable "environment_crn" {
-  description = "CRN of the IBM Cloudant Dedicated Hardware plan instance"
-  type        = string
-
-  validation {
-    condition     = length(var.environment_crn) > 0
-    error_message = "Dedicated environment CRN is required to create a standard cloudant instance."
-  }
-}
-
-variable "service_endpoints" {
-  type        = string
-  description = "Sets the endpoint of the Key Protect instance, valid values are 'public', 'private', or 'public-and-private'"
-  default     = "private"
-
-  validation {
-    condition     = can(regex("public|public-and-private|private", var.service_endpoints))
-    error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
-  }
 }
 
 variable "database_config" {
@@ -68,4 +47,14 @@ variable "database_config" {
     partitioned = false
     shards      = 16
   }]
+}
+
+variable "environment_crn" {
+  description = "CRN of the IBM Cloudant Dedicated Hardware plan instance"
+  type        = string
+
+  validation {
+    condition     = length(var.environment_crn) > 0
+    error_message = "Dedicated environment CRN is required to create a standard cloudant instance."
+  }
 }
