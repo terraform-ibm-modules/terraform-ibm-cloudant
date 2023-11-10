@@ -9,7 +9,7 @@ module "cloudant" {
   access_tags         = var.access_tags
   capacity            = var.capacity
   environment_crn     = var.environment_crn
-  legacy_credentials  = var.legacy_credentials
+  legacy_credentials  = false
   include_data_events = var.include_data_events
   database_config     = var.database_config
 }

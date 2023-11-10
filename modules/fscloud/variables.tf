@@ -14,12 +14,6 @@ variable "instance_name" {
   type        = string
 }
 
-variable "legacy_credentials" {
-  type        = bool
-  description = "Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials."
-  default     = false # uses only IAM credentials
-}
-
 variable "include_data_events" {
   type        = bool
   description = "Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker."
