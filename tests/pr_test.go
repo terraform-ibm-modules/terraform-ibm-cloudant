@@ -2,6 +2,8 @@
 package test
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"log"
 	"os"
 	"testing"
@@ -61,21 +63,29 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunFSCloudExample(t *testing.T) {
+func TestRunFSCloudDAExample(t *testing.T) {
 	t.Parallel()
 
-	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
-		Testing:       t,
-		TerraformDir:  "examples/fscloud",
-		Prefix:        "fscloud",
-		Region:        "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
-		ResourceGroup: resourceGroup,
-		TerraformVars: map[string]interface{}{
-			"access_tags": permanentResources["accessTags"],
-			// crn of the dedicated host
-			"environment_crn": permanentResources["dedicatedHostCrn"],
-		},
+	// Generate a 6 char long random string for the instance_name
+	randomBytes := make([]byte, 6)
+	_, err := rand.Read(randomBytes)
+	randomInstanceName := "fscloud" + base64.URLEncoding.EncodeToString(randomBytes)[:6]
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: "solutions/fscloud",
+		Region:       "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
 	})
+
+	options.TerraformVars = map[string]interface{}{
+		"ibmcloud_api_key": options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"],
+		"access_tags":      permanentResources["accessTags"],
+		// crn of the dedicated host
+		"environment_crn":   permanentResources["dedicatedHostCrn"],
+		"resource_group_id": permanentResources["resourceGroupTestPermanentId"],
+		"instance_name":     randomInstanceName,
+	}
+
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
