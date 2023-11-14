@@ -17,5 +17,3 @@ module "cloudant" {
   include_data_events = var.include_data_events
   database_config     = var.database_config
 }
-
-# Goal is to add existing resource group or a new resource  group
