@@ -1,4 +1,10 @@
-# Cloudant Deployable Architecture (DA)
+# Deployable Architecture (DA) for the dedicated IBM Cloudant instance
+
+Deployable Architecture for IBM Cloudant which deploys the following resources:
+
+- A resource group, if one is not passed in.
+- A dedicated cloudant instance
+- A basic database in the Cloudant instance
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
