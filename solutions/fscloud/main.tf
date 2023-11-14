@@ -8,7 +8,7 @@ module "resource_group" {
 
 module "cloudant" {
   source              = "../../modules/fscloud"
-  resource_group_id   = var.resource_group_id == null ? module.resource_group.resource_group_id : var.resource_group_id
+  resource_group_id   = var.resource_group_id == null ? module.resource_group[0].resource_group_id : var.resource_group_id
   instance_name       = var.instance_name
   region              = var.region
   tags                = var.tags
