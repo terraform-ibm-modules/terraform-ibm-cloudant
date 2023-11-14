@@ -13,6 +13,19 @@ variable "region" {
 variable "resource_group_id" {
   description = "The Id of an existing IBM Cloud resource group where the instance will be grouped."
   type        = string
+  default     = null
+}
+
+variable "existing_resource_group" {
+  type        = string
+  description = "An existing resource group name to use."
+  default     = null
+}
+
+variable "resource_group_name" {
+  type        = string
+  description = "New resource group name to use."
+  default     = null
 }
 
 variable "instance_name" {

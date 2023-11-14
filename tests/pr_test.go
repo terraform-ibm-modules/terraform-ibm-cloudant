@@ -2,8 +2,6 @@
 package test
 
 import (
-	"crypto/rand"
-	"encoding/base64"
 	"log"
 	"os"
 	"testing"
@@ -66,15 +64,12 @@ func TestRunUpgradeExample(t *testing.T) {
 func TestRunFSCloudDAExample(t *testing.T) {
 	t.Parallel()
 
-	// Generate a 6 char long random string for the instance_name
-	randomBytes := make([]byte, 6)
-	_, err := rand.Read(randomBytes)
-	randomInstanceName := "fscloud" + base64.URLEncoding.EncodeToString(randomBytes)[:6]
-
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
-		Testing:      t,
-		TerraformDir: "solutions/fscloud",
-		Region:       "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
+		Testing:       t,
+		TerraformDir:  "solutions/fscloud",
+		Region:        "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
+		Prefix:        "fscloud",
+		ResourceGroup: resourceGroup,
 	})
 
 	options.TerraformVars = map[string]interface{}{
@@ -82,8 +77,8 @@ func TestRunFSCloudDAExample(t *testing.T) {
 		"access_tags":      permanentResources["accessTags"],
 		// crn of the dedicated host
 		"environment_crn":   permanentResources["dedicatedHostCrn"],
-		"resource_group_id": permanentResources["resourceGroupTestPermanentId"],
-		"instance_name":     randomInstanceName,
+		"resource_group_id": options.ResourceGroup,
+		"instance_name":     options.Prefix,
 	}
 
 	output, err := options.RunTestConsistency()
