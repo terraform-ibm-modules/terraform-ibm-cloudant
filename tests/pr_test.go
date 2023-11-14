@@ -76,9 +76,10 @@ func TestRunFSCloudDAExample(t *testing.T) {
 		"ibmcloud_api_key": options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"],
 		"access_tags":      permanentResources["accessTags"],
 		// crn of the dedicated host
-		"environment_crn":              permanentResources["dedicatedHostCrn"],
-		"existing_resource_group_name": options.ResourceGroup,
-		"instance_name":                options.Prefix,
+		"environment_crn":         permanentResources["dedicatedHostCrn"],
+		"existing_resource_group": true,
+		"resource_group_name":     options.ResourceGroup,
+		"instance_name":           options.Prefix,
 	}
 
 	output, err := options.RunTestConsistency()

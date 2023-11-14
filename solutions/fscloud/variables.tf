@@ -17,9 +17,9 @@ variable "resource_group_id" {
 }
 
 variable "existing_resource_group" {
-  type        = string
-  description = "An existing resource group name to use."
-  default     = null
+  type        = bool
+  description = "If existing resource group will be used."
+  default     = false
 }
 
 variable "resource_group_name" {
