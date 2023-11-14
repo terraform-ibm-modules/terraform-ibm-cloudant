@@ -1,6 +1,6 @@
 # Deployable Architecture (DA) for the dedicated IBM Cloudant instance
 
-Deployable Architecture for IBM Cloudant which deploys the following resources:
+Deployable Architecture for the dedicated IBM Cloudant instance which deploys the following resources:
 
 - A resource group, if one is not passed in.
 - A dedicated cloudant instance
