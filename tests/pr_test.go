@@ -61,14 +61,24 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunFSCloudDAExample(t *testing.T) {
+func GetDatabaseConfig() interface{} {
+	return []map[string]interface{}{
+		{
+			"db":          "cloudant-dedicated-db",
+			"partitioned": false,
+			"shards":      16,
+		},
+	}
+}
+
+func TestRunCloudantDAExample(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
-		TerraformDir:  "solutions/fscloud",
+		TerraformDir:  "solutions/dedicated",
 		Region:        "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
-		Prefix:        "fscloud",
+		Prefix:        "dedicated",
 		ResourceGroup: resourceGroup,
 	})
 
@@ -80,6 +90,7 @@ func TestRunFSCloudDAExample(t *testing.T) {
 		"existing_resource_group": true,
 		"resource_group_name":     options.ResourceGroup,
 		"instance_name":           options.Prefix,
+		"database_config":         GetDatabaseConfig(),
 	}
 
 	output, err := options.RunTestConsistency()

@@ -10,12 +10,6 @@ variable "region" {
   default     = "us-south"
 }
 
-variable "resource_group_id" {
-  description = "The Id of an existing IBM Cloud resource group where the instance will be grouped."
-  type        = string
-  default     = null
-}
-
 variable "existing_resource_group" {
   type        = bool
   description = "If existing resource group will be used."
@@ -24,8 +18,7 @@ variable "existing_resource_group" {
 
 variable "resource_group_name" {
   type        = string
-  description = "New resource group name to use."
-  default     = null
+  description = "Creates a new resource group if var.existing_resource_group is set to false, otherwise uses existing resource group with this name."
 }
 
 variable "instance_name" {
@@ -53,7 +46,7 @@ variable "access_tags" {
 
 variable "tags" {
   type        = list(string)
-  description = "List of tags to be associated to cloudant instance"
+  description = "List of resource tags to be associated to cloudant instance"
   default     = []
 }
 
