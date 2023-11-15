@@ -1,6 +1,6 @@
 # IBM Cloudant Dedicated on IBM Cloud Dedicated
 
-Deployable Architecture for the dedicated IBM Cloudant instance which supports provisioning the following resources:
+Solutions for an IBM Cloudant dedicated instance which supports provisioning the following resources:
 
 - A resource group, if one is not passed in.
 - An IBM Cloudant Dedicated instance in IBM Cloud Dedicated
