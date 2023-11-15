@@ -1,10 +1,14 @@
-# Deployable Architecture (DA) for the dedicated IBM Cloudant instance
+# IBM Cloudant Dedicated on IBM Cloud Dedicated
 
-Deployable Architecture for the dedicated IBM Cloudant instance which deploys the following resources:
+Deployable Architecture for the dedicated IBM Cloudant instance which supports provisioning the following resources:
 
 - A resource group, if one is not passed in.
-- A dedicated cloudant instance
-- A basic database in the Cloudant instance
+- An IBM Cloudant Dedicated instance in IBM Cloud Dedicated
+- A Cloudant database
+
+## Before you begin
+
+* You need an [IBM Cloudant Dedicated](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-dedicated) Hardware plan instance in order to provision the Cloudant instance in.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
