@@ -16,6 +16,10 @@ repos:
       require_serial: true
       pass_filenames: false
       description: This hook ensures that a file named LICENSE exists for any repo (on github.com) which contains .tf files in the root directory of the repo
+- repo: https://github.com/crate-ci/typos
+  rev: v1.16.23
+  hooks:
+    - id: typos
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.5.0
   hooks:

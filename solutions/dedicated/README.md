@@ -1,6 +1,6 @@
 # IBM Cloudant Dedicated on IBM Cloud Dedicated
 
-This architecture creates an IBM Cloudant Dedicated instance in IBM Cloud Dedicated and provisions the following resources:
+This architecturdde creates an IBM Cloudant Dedicated instance in IBM Cloud Dedicated and provisions the following resources:
 
 - A resource group, if one is not passed in.
 - An IBM Cloudant Dedicated instance on IBM Cloud Dedicated
