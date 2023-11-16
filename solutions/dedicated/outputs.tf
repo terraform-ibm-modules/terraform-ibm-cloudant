@@ -3,22 +3,22 @@
 ###############################################################################
 
 output "instance_name" {
-  description = "Name of the cloudant instance"
+  description = "Name of the IBM Cloudant instance"
   value       = module.cloudant.instance_name
 }
 
 output "instance_id" {
-  description = "The id of the cloudant instance created"
+  description = "ID of the IBM Cloudant instance"
   value       = module.cloudant.instance_id
 }
 
 output "instance_guid" {
-  description = "Global identifier of the cloudant instance created"
+  description = "Global identifier of the IBM Cloudant instance"
   value       = module.cloudant.instance_guid
 }
 
 output "plan" {
-  description = "The plan used to create cloudant instance"
+  description = "Plan used to create the IBM Cloudant instance"
   value       = module.cloudant.plan
 }
 
@@ -28,36 +28,36 @@ output "crn" {
 }
 
 output "instance_url" {
-  description = "The dashboard URL to access resource"
+  description = "Dashboard URL to access resources"
   value       = module.cloudant.instance_url
 }
 
 output "resource_group_name" {
-  description = "The resource group name in which resource is provisioned"
+  description = "Name of the resource group where the resource is provisioned"
   value       = module.cloudant.resource_group_name
 }
 
 output "state" {
-  description = "The current state of the instance"
+  description = "Current state of the instance"
   value       = module.cloudant.state
 }
 
 output "capacity" {
-  description = "A number of blocks of throughput units"
+  description = "Number of blocks of throughput units"
   value       = module.cloudant.capacity
 }
 
 output "resource_keys_url" {
-  description = "The relative path to the resource keys for the instance"
+  description = "Relative path to the resource keys for the instance"
   value       = module.cloudant.resource_keys_url
 }
 
 output "private_endpoint" {
-  description = "The external private endpoint"
+  description = "External private endpoint"
   value       = module.cloudant.private_endpoint
 }
 
 output "db_map" {
-  description = "A map of the Cloudant database names created and their respective IDs"
+  description = "IBM Cloudant database names and their IDs"
   value       = module.cloudant.db_map
 }
