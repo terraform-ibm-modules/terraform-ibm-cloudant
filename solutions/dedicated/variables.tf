@@ -62,6 +62,6 @@ variable "database_config" {
     shards      = optional(number)
   }))
 
-  description = "The databases to create in the IBM Cloudant instance with options for partitioning and sharding."
+  description = "The databases to create in the IBM Cloudant instance with options to create partitions and shards."
   default     = []
 }
