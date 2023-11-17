@@ -28,7 +28,7 @@ variable "instance_name" {
 
 variable "include_data_events" {
   type        = bool
-  description = "Whether to include data event types in events that are sent to IBM Cloud Activity Tracker. If false, only management events are sent."
+  description = "Whether to include data event types in events that are sent to IBM Cloud Activity Tracker. The emitted events are only of the `management` type."
   default     = false
 }
 
@@ -51,7 +51,7 @@ variable "tags" {
 }
 
 variable "environment_crn" {
-  description = "The CRN of the instance of the IBM Cloudant Dedicated Hardware plan to provision an IBM Cloudant instance"
+  description = "The CRN of the instance of the IBM Cloudant Dedicated Hardware plan to provision an IBM Cloudant instance."
   type        = string
 }
 
@@ -62,6 +62,6 @@ variable "database_config" {
     shards      = optional(number)
   }))
 
-  description = "The databases to create in the IBM Cloudant instance and whether they are partitioned (or the number of shards if non-partitioned)."
+  description = "The databases to create in the IBM Cloudant instance with options for partitioning and sharding."
   default     = []
 }
