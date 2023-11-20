@@ -52,3 +52,23 @@ func TestRunBasicExampleSchematics(t *testing.T) {
 	err := options.RunSchematicTest()
 	assert.NoError(t, err, "Schematic Test had unexpected error")
 }
+
+func TestRunFSCloudExample(t *testing.T) {
+	t.Parallel()
+
+	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
+		Testing:       t,
+		TerraformDir:  "examples/fscloud",
+		Prefix:        "fscloud",
+		Region:        "us-south", // For FSCloud locking into us-south since that is where the dedicated host is provisioned
+		ResourceGroup: resourceGroup,
+		TerraformVars: map[string]interface{}{
+			"access_tags": permanentResources["accessTags"],
+			// crn of the dedicated host
+			"environment_crn": permanentResources["dedicatedHostCrn"],
+		},
+	})
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
