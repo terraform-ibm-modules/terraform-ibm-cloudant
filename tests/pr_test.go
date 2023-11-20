@@ -61,7 +61,7 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunDedicatedSolutions(t *testing.T) {
+func TestRunDedicatedSolution(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{

@@ -12,13 +12,13 @@ variable "region" {
 
 variable "existing_resource_group" {
   type        = bool
-  description = "Whether to use an existing resource group. If false, specify the name for the new resource group in the `resource_group_name` input."
+  description = "Whether to use an existing resource group."
   default     = false
 }
 
 variable "resource_group_name" {
   type        = string
-  description = "Add a new resource group with this name if the `existing_resource_group` input is false. To use an existing resource group, set `existing_resource_group` to true instead."
+  description = "The name of a new or an existing resource group in which to provision the Cloudant instance in."
 }
 
 variable "instance_name" {
