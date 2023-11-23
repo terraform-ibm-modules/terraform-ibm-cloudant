@@ -1,0 +1,111 @@
+{
+  "products": [
+    {
+      "name": "terraform-ibm-cloudant",
+      "label": "IBM Cloudant module",
+      "product_kind": "solution",
+      "tags": [
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "reference_architecture",
+        "solution"
+      ],
+      "keywords": [
+        "cloudant",
+        "slz",
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution",
+        "dedicated hardware",
+        "cloud dedicated"
+      ],
+      "short_description": "Creates an IBM Cloudant Dedicated instance in IBM Cloud Dedicated environment.",
+      "long_description": "This architecture creates an IBM Cloudant Dedicated instance in IBM Cloud Dedicated environment and supports provisioning the following resources:\n- A resource group, if one is not passed in.\n- An IBM Cloudant Dedicated instance on IBM Cloud Dedicated\n- A IBM Cloudant database\n",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/blob/main/solutions/dedicated/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/images/cloudant.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Creates an IBM Cloudant Dedicated instance",
+          "description": "Creates an IBM Cloudant Dedicated instance on IBM Cloud Dedicated."
+        },
+        {
+          "title": "Creates an IBM Cloudant database",
+          "description": "Creates an IBM Cloudant database on IBM Cloudant Dedicated instance."
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Dedicated",
+          "name": "dedicated",
+          "install_type": "fullstack",
+          "working_directory": "solutions/dedicated",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": [
+              {
+                "profile_name": "IBM Cloud for Financial Services",
+                "profile_version": "1.5.0"
+              }
+            ]},
+          "release_notes_url": "",
+          "configuration": [
+            {
+              "hidden": true,
+              "key": "instance_name"
+            },
+            {
+              "hidden": true,
+              "key": "include_data_events"
+            },
+            {
+              "hidden": true,
+              "key": "capacity"
+            },
+            {
+              "hidden": true,
+              "key": "environment_crn"
+            },
+            {
+              "hidden": true,
+              "key": "database_config"
+            }
+          ],
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "cloudant"
+            }
+          ],
+          "architecture": {
+            "descriptions": "",
+            "features": [
+              {
+                "title": "IBM Cloudant Dedicated instance on IBM Cloud Dedicated",
+                "description": "Yes"
+              },
+              {
+                "title": "IBM Cloudant database on IBM Cloudant Dedicated instance",
+                "description": "Yes"
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "IBM Cloudant Dedicated",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/main/reference-architecture/dedicated_cloudant.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "An IBM Cloudant Dedicated instance on IBM Cloud Dedicated. Also, IBM Cloudant Database(s) deployed on the IBM Cloudant instance."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
