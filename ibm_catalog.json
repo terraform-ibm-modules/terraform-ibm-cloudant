@@ -13,12 +13,11 @@
       ],
       "keywords": [
         "cloudant",
-        "slz",
         "IaC",
         "infrastructure as code",
         "terraform",
         "solution",
-        "dedicated hardware",
+        "cloudant dedicated",
         "cloud dedicated"
       ],
       "short_description": "Creates an IBM Cloudant Dedicated instance in IBM Cloud Dedicated environment.",
@@ -29,7 +28,7 @@
       "features": [
         {
           "title": "Creates an IBM Cloudant Dedicated instance",
-          "description": "Creates an IBM Cloudant Dedicated instance on IBM Cloud Dedicated."
+          "description": "Creates an IBM Cloudant Dedicated instance on IBM Cloud Dedicated environment."
         },
         {
           "title": "Creates an IBM Cloudant database",
