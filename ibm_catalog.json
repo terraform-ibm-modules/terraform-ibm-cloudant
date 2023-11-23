@@ -28,8 +28,8 @@
       "provider_name": "IBM",
       "features": [
         {
-          "title": "Creates an IBM Cloudant Dedicated instance",
-          "description": "Creates an IBM Cloudant Dedicated instance."
+          "title": "Creates an IBM Cloudant instance",
+          "description": "Creates an IBM Cloudant instance."
         },
         {
           "title": "Creates an IBM Cloudant database",
