@@ -67,7 +67,7 @@
               "role_crns": [
                 "crn:v1:bluemix:public:iam::::serviceRole:Manager"
               ],
-              "service_name": "cloudant"
+              "service_name": "cloudantnosqldb"
             }
           ],
           "architecture": {
