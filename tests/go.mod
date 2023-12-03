@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/stretchr/testify v1.8.4
-	github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper v1.25.3
+	github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper v1.25.4
 )
 
 require (
@@ -46,7 +46,7 @@ require (
 	github.com/go-openapi/loads v0.21.2 // indirect
 	github.com/go-openapi/runtime v0.26.0 // indirect
 	github.com/go-openapi/spec v0.20.9 // indirect
-	github.com/go-openapi/strfmt v0.21.7 // indirect
+	github.com/go-openapi/strfmt v0.21.8 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
 	github.com/go-openapi/validate v0.22.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
