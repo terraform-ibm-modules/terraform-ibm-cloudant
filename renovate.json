@@ -10,7 +10,7 @@
     {
       "description": "Allow the locked in provider version to be updated to the latest for DAs",
       "enabled": true,
-      "matchPaths": ["solutions/dedicated"],
+      "matchFileNames": ["solutions/dedicated"],
       "matchManagers": ["terraform"],
       "matchDepTypes": ["required_provider"],
       "rangeStrategy": "bump",
