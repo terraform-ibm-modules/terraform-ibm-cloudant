@@ -39,3 +39,9 @@ variable "existing_sm_instance_region" {
   description = "Required if value is passed into var.existing_sm_instance_guid"
   default     = null
 }
+
+variable "sm_service_plan" {
+  type        = string
+  description = "Description of service plan to be used to provision Secrets Manager if not passing a value for var.existing_sm_instance_guid"
+  default     = "trial"
+}
