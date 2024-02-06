@@ -32,7 +32,7 @@ variable "allow_credentials" {
 }
 
 variable "origins" {
-  description = "An array of strings that contain allowed origin domains."
+  description = "An array of strings that contain allowed origin domains. "
   type        = list(string)
   default     = []
 }
