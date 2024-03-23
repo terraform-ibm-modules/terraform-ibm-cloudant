@@ -25,6 +25,24 @@ variable "instance_name" {
   type        = string
 }
 
+variable "allow_credentials" {
+  description = "Boolean value to allow authentication credentials."
+  type        = bool
+  default     = true
+}
+
+variable "origins" {
+  description = "An array of strings that contain allowed origin domains. "
+  type        = list(string)
+  default     = []
+}
+
+variable "enable_cors" {
+  description = "Boolean value to enable CORS. The supported values are true and false."
+  type        = bool
+  default     = false
+}
+
 variable "legacy_credentials" {
   type        = bool
   description = "Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials."

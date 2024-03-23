@@ -12,6 +12,9 @@ module "cloudant" {
   region              = var.region
   tags                = var.tags
   access_tags         = var.access_tags
+  enable_cors         = var.enable_cors
+  allow_credentials   = var.allow_credentials
+  origins             = var.origins
   capacity            = var.capacity
   environment_crn     = var.environment_crn
   include_data_events = var.include_data_events
