@@ -8,8 +8,8 @@
         "ibm_created",
         "target_terraform",
         "terraform",
-        "reference_architecture",
-        "solution"
+        "solution",
+        "data_management"
       ],
       "keywords": [
         "cloudant",
