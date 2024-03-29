@@ -9,7 +9,7 @@
         "target_terraform",
         "terraform",
         "solution",
-        "database"
+        "data_management"
       ],
       "keywords": [
         "cloudant",
