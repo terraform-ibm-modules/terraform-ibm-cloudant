@@ -10,10 +10,15 @@ resource "ibm_cloudant" "cloudant_instance" {
   include_data_events = var.include_data_events # Sends data event types to Activity Tracker with LogDNA
   capacity            = var.capacity
   resource_group_id   = var.resource_group_id
-  enable_cors         = false
+  enable_cors         = var.enable_cors
   tags                = var.tags
   service_endpoints   = var.service_endpoints
   environment_crn     = var.environment_crn
+
+  cors_config {
+    allow_credentials = var.allow_credentials
+    origins           = var.origins
+  }
 
   timeouts {
     create = "120m" # Extending provisioning time to 120 minutes

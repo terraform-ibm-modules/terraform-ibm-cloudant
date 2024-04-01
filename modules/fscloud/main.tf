@@ -5,6 +5,9 @@ module "cloudant" {
   region              = var.region
   plan                = "standard"
   service_endpoints   = "private"
+  enable_cors         = var.enable_cors
+  allow_credentials   = var.allow_credentials
+  origins             = var.origins
   tags                = var.tags
   access_tags         = var.access_tags
   capacity            = var.capacity
