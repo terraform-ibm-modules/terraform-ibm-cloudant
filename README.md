@@ -83,12 +83,15 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | List of access tags to be associated with the Cloudant instance | `list(string)` | `[]` | no |
+| <a name="input_allow_credentials"></a> [allow\_credentials](#input\_allow\_credentials) | Boolean value to allow authentication credentials. | `bool` | `true` | no |
 | <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
 | <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br>    db          = string<br>    partitioned = optional(bool)<br>    shards      = optional(number)<br>  }))</pre> | `[]` | no |
+| <a name="input_enable_cors"></a> [enable\_cors](#input\_enable\_cors) | Boolean value to enable CORS. The supported values are true and false. | `bool` | `false` | no |
 | <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance | `string` | `null` | no |
 | <a name="input_include_data_events"></a> [include\_data\_events](#input\_include\_data\_events) | Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker. | `bool` | `false` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | The name of the Cloudant instance | `string` | n/a | yes |
 | <a name="input_legacy_credentials"></a> [legacy\_credentials](#input\_legacy\_credentials) | Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. | `bool` | `false` | no |
+| <a name="input_origins"></a> [origins](#input\_origins) | An array of strings that contain allowed origin domains. | `list(string)` | `[]` | no |
 | <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. Standard or lite. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the instance will be grouped. | `string` | n/a | yes |
