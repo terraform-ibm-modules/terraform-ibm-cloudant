@@ -79,7 +79,7 @@ resource "ibm_iam_access_group_members" "accgroupmem" {
 # Create Secrets Manager Instance
 module "secrets_manager" {
   source               = "terraform-ibm-modules/secrets-manager/ibm"
-  version              = "1.3.1"
+  version              = "1.13.4"
   resource_group_id    = module.resource_group.resource_group_id
   region               = local.sm_region
   secrets_manager_name = "${var.prefix}-secrets-manager"
@@ -91,7 +91,7 @@ module "secrets_manager" {
 # Add a Secrets Group to the secret manager instance
 module "secrets_manager_group" {
   source                   = "terraform-ibm-modules/secrets-manager-secret-group/ibm"
-  version                  = "1.1.4"
+  version                  = "1.2.1"
   region                   = local.sm_region
   secrets_manager_guid     = local.sm_guid
   secret_group_name        = "${var.prefix}-cloudant-secrets"
