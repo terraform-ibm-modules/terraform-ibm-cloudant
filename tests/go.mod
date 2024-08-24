@@ -2,7 +2,7 @@ module github.com/terraform-ibm-modules/terraform-ibm-cloudant
 
 go 1.22
 
-toolchain go1.22.6
+toolchain go1.23.0
 
 require (
 	github.com/stretchr/testify v1.9.0
