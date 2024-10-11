@@ -79,7 +79,7 @@ resource "ibm_iam_access_group_members" "accgroupmem" {
 # Create Secrets Manager Instance
 module "secrets_manager" {
   source               = "terraform-ibm-modules/secrets-manager/ibm"
-  version              = "1.18.6"
+  version              = "1.18.7"
   resource_group_id    = module.resource_group.resource_group_id
   region               = local.sm_region
   secrets_manager_name = "${var.prefix}-secrets-manager"
