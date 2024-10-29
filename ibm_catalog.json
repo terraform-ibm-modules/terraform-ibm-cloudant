@@ -2,7 +2,7 @@
   "products": [
     {
       "name": "deploy-arch-ibm-cloudant",
-      "label": "Cloudant",
+      "label": "Cloud automation for Cloudant",
       "product_kind": "solution",
       "tags": [
         "ibm_created",
