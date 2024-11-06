@@ -6,3 +6,10 @@ CRA_TARGETS:
     PROFILE_ID: "bfacb71d-4b84-41ac-9825-e8a3a3eb7405" # SCC profile ID (currently set to IBM Cloud Framework for Financial Services 1.6.0 profile).
     CRA_ENVIRONMENT_VARIABLES:
       TF_VAR_environment_crn: "test-env-crn"
+  - CRA_TARGET: "solutions/dedicated"
+    CRA_IGNORE_RULES_FILE: "cra-tf-validate-ignore-rules.json"
+    PROFILE_ID: "bfacb71d-4b84-41ac-9825-e8a3a3eb7405" # SCC profile ID (currently set to IBM Cloud Framework for Financial Services 1.6.0 profile).
+    CRA_ENVIRONMENT_VARIABLES:
+      TF_VAR_resource_group_name: "terraform-ibm-cloudant"
+      TF_VAR_instance_name: "test-cloudant-instance-name"
+      TF_VAR_environment_crn: "test-env-crn"
