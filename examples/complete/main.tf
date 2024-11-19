@@ -8,7 +8,7 @@ locals {
       ? local.validate_sm_region_msg
   : ""))
 
-  sm_guid   = var.existing_sm_instance_guid == null ? module.secrets_manager.secrets_manager_guid : var.existing_sm_instance_guid
+  sm_guid   = var.existing_sm_instance_guid == null ? module.secrets_manager[0].secrets_manager_guid : var.existing_sm_instance_guid
   sm_region = var.existing_sm_instance_region == null ? var.region : var.existing_sm_instance_region
 }
 
@@ -25,7 +25,7 @@ module "resource_group" {
 }
 
 ##############################################################################
-# Standard Cloudant Instance with IAM authentication
+# Standard Cloudant Instance with IAM Authentication
 ##############################################################################
 
 module "create_cloudant" {
@@ -78,6 +78,7 @@ resource "ibm_iam_access_group_members" "accgroupmem" {
 
 # Create Secrets Manager Instance
 module "secrets_manager" {
+  count                = var.existing_sm_instance_guid == null ? 1 : 0
   source               = "terraform-ibm-modules/secrets-manager/ibm"
   version              = "1.18.14"
   resource_group_id    = module.resource_group.resource_group_id
