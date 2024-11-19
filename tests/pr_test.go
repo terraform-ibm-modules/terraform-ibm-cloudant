@@ -78,6 +78,7 @@ func TestRunDedicatedSolution(t *testing.T) {
 		// crn of the dedicated host
 		"environment_crn":         permanentResources["dedicatedHostCrn"],
 		"existing_resource_group": true,
+		"provider_visibility":     "public",
 		"resource_group_name":     options.ResourceGroup,
 		"instance_name":           options.Prefix,
 		"database_config": []map[string]interface{}{
