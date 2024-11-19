@@ -25,7 +25,7 @@ module "resource_group" {
 }
 
 ##############################################################################
-# Standard Cloudant Instance with IAM authentication
+# Standard Cloudant Instance with IAM Authentication
 ##############################################################################
 
 module "create_cloudant" {
