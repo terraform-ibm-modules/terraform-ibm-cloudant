@@ -13,6 +13,11 @@ variable "plan" {
     condition     = contains(["standard", "lite"], var.plan)
     error_message = "Supported plans: standard or lite. Cloudant instance on dedicated host supports standard plan only."
   }
+
+  validation {
+    condition     = var.plan != "standard" && var.environment_crn != null ? false : true
+    error_message = "Only standard plan is supported on a dedicated hardware instance"
+  }
 }
 
 variable "resource_group_id" {
