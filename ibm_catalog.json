@@ -110,6 +110,48 @@
                 "value": "public-and-private"
               }
             ]
+          },
+          {
+            "key": "access_tags"
+          },
+          {
+            "key": "allow_credentials"
+          },
+          {
+            "key": "capacity"
+          },
+          {
+            "key": "database_config"
+          },
+          {
+            "key": "enable_cors"
+          },
+          {
+            "key": "environment_crn"
+          },
+          {
+            "key": "existing_resource_group"
+          },
+          {
+            "key": "ibmcloud_api_key"
+          },
+          {
+            "key": "include_data_events"
+          },
+          {
+            "key": "instance_name"
+          },
+          {
+            "key": "origins"
+          },
+          {
+            "key": "region"
+          },
+          {
+            "key": "resource_group_name"
+          },
+          {
+            "key": "tags"
           }
         ]
         }
