@@ -29,18 +29,28 @@ variable "allow_credentials" {
   description = "Boolean value to allow authentication credentials."
   type        = bool
   default     = true
+
+  validation {
+    condition     = var.enable_cors == false && var.allow_credentials != null ? false : true
+    error_message = "var.allow_credentials can only be set if var.enable_cors is true"
+  }
 }
 
 variable "origins" {
   description = "An array of strings that contain allowed origin domains. "
   type        = list(string)
   default     = []
+
+  validation {
+    condition     = var.enable_cors == false && var.origins != null ? false : true
+    error_message = "var.origins can only be set if var.enable_cors is true"
+  }
 }
 
 variable "enable_cors" {
   description = "Boolean value to enable CORS. The supported values are true and false."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "legacy_credentials" {
