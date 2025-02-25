@@ -58,8 +58,3 @@ resource "ibm_cloudant_database" "cloudant_database" {
   instance_crn = ibm_cloudant.cloudant_instance.crn
 
 }
-
-locals {
-  # tflint-ignore: terraform_unused_declarations
-  validate_plan = var.plan != "standard" && var.environment_crn != null ? tobool("Only standard plan is supported on a dedicated hardware instance") : true
-}
