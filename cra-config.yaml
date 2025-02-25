@@ -9,3 +9,4 @@ CRA_TARGETS:
       TF_VAR_instance_name: "mock"
       TF_VAR_environment_crn: "test-env-crn"
       TF_VAR_provider_visibility: "public"
+      TF_VAR_enable_cors: "true"
