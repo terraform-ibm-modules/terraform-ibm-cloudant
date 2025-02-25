@@ -39,9 +39,9 @@ variable "origins" {
 }
 
 variable "enable_cors" {
-  description = "Boolean value to enable CORS. The supported values are true and false."
+  description = "Boolean value to enable cross-origin resource sharing (CORS)."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "include_data_events" {
