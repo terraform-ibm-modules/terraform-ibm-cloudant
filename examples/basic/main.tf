@@ -21,6 +21,7 @@ module "create_cloudant" {
   access_tags       = var.access_tags
   region            = var.region
   tags              = var.resource_tags
+  enable_cors       = var.enable_cors
   database_config = [{
     db          = "cloudant-db"
     partitioned = false

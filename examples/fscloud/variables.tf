@@ -58,3 +58,9 @@ variable "environment_crn" {
     error_message = "Dedicated environment CRN is required to create a standard cloudant instance."
   }
 }
+
+variable "enable_cors" {
+  description = "Boolean value to enable cross-origin resource sharing (CORS)."
+  type        = bool
+  default     = false
+}
