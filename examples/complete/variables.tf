@@ -39,9 +39,3 @@ variable "existing_sm_instance_region" {
   description = "Required if value is passed into var.existing_sm_instance_guid"
   default     = null
 }
-
-variable "enable_cors" {
-  description = "Boolean value to enable cross-origin resource sharing (CORS)."
-  type        = bool
-  default     = false
-}

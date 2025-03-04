@@ -20,9 +20,6 @@ func TestRunBasicExample(t *testing.T) {
 		TerraformDir:  basicExampleTerraformDir,
 		Prefix:        "cloudant",
 		ResourceGroup: resourceGroup,
-		TerraformVars: map[string]interface{}{
-			"enable_cors": true,
-		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -49,7 +46,6 @@ func TestRunBasicExampleSchematics(t *testing.T) {
 		{Name: "region", Value: options.Region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
 		{Name: "resource_group", Value: resourceGroup, DataType: "string"},
-		{Name: "enable_cors", Value: true, DataType: "bool"},
 	}
 
 	err := options.RunSchematicTest()
@@ -69,7 +65,6 @@ func TestRunFSCloudExample(t *testing.T) {
 			"access_tags": permanentResources["accessTags"],
 			// crn of the dedicated host
 			"environment_crn": permanentResources["dedicatedHostCrn"],
-			"enable_cors":     true,
 		},
 	})
 	output, err := options.RunTestConsistency()

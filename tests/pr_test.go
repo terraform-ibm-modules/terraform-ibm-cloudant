@@ -36,7 +36,6 @@ func setupOptions(t *testing.T, prefix string) *testhelper.TestOptions {
 		TerraformVars: map[string]interface{}{
 			"existing_sm_instance_guid":   permanentResources["secretsManagerGuid"],
 			"existing_sm_instance_region": permanentResources["secretsManagerRegion"],
-			"enable_cors":                 true,
 		},
 	})
 	return options
@@ -89,7 +88,6 @@ func TestRunDedicatedSolution(t *testing.T) {
 				"shards":      16,
 			},
 		},
-		"enable_cors": true,
 	}
 
 	output, err := options.RunTestConsistency()

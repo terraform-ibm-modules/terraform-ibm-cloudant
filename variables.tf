@@ -31,25 +31,15 @@ variable "instance_name" {
 }
 
 variable "allow_credentials" {
-  description = "Boolean value to allow authentication credentials."
+  description = "Boolean value to allow authentication credentials. This will only be used if enable_cors is set to true."
   type        = bool
   default     = true
-
-  validation {
-    condition     = var.enable_cors == false && var.allow_credentials != null ? false : true
-    error_message = "var.allow_credentials can only be set if var.enable_cors is true"
-  }
 }
 
 variable "origins" {
-  description = "An array of strings that contain allowed origin domains. "
+  description = "An array of strings that contain allowed origin domains. This value is only used if enable_cors is set to true."
   type        = list(string)
   default     = []
-
-  validation {
-    condition     = var.enable_cors == false && var.origins != null ? false : true
-    error_message = "var.origins can only be set if var.enable_cors is true"
-  }
 }
 
 variable "enable_cors" {

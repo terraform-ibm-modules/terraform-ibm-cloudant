@@ -15,9 +15,12 @@ resource "ibm_cloudant" "cloudant_instance" {
   service_endpoints   = var.service_endpoints
   environment_crn     = var.environment_crn
 
-  cors_config {
-    allow_credentials = var.allow_credentials
-    origins           = var.origins
+  dynamic "cors_config" {
+    for_each = var.enable_cors ? [1] : []
+    content {
+      allow_credentials = var.allow_credentials
+      origins           = var.origins
+    }
   }
 
   timeouts {

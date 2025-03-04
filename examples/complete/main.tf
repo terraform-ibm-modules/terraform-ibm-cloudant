@@ -35,7 +35,7 @@ module "create_cloudant" {
   region            = local.sm_region
   plan              = "standard"
   tags              = var.resource_tags
-  enable_cors       = var.enable_cors
+  enable_cors       = true # on setting enable_cors to true, the default values of allow_credentials and origins will be used.
 }
 
 ##############################################################################

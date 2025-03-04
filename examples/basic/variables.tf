@@ -33,9 +33,3 @@ variable "resource_tags" {
   description = "Optional list of tags to be added to created resources"
   default     = []
 }
-
-variable "enable_cors" {
-  description = "Boolean value to enable cross-origin resource sharing (CORS)."
-  type        = bool
-  default     = false
-}
