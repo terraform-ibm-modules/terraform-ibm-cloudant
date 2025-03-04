@@ -20,7 +20,6 @@ func TestRunBasicExample(t *testing.T) {
 		TerraformDir:  basicExampleTerraformDir,
 		Prefix:        "cloudant",
 		ResourceGroup: resourceGroup,
-		TerraformVars: map[string]interface{}{},
 	})
 
 	output, err := options.RunTestConsistency()
