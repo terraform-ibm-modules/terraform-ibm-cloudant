@@ -23,6 +23,7 @@ module "create_cloudant" {
   tags              = var.resource_tags
   environment_crn   = var.environment_crn
   database_config   = var.database_config
+  enable_cors       = true # on setting enable_cors to true, the default values of allow_credentials and origins will be used.
 }
 
 ##############################################################################
