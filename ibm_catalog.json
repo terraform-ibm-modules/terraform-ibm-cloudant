@@ -61,7 +61,8 @@
                 "profile_name": "IBM Cloud Framework for Financial Services",
                 "profile_version": "1.7.0"
               }
-            ]},
+            ]
+          },
           "iam_permissions": [
             {
               "role_crns": [
@@ -71,7 +72,6 @@
             }
           ],
           "architecture": {
-            "descriptions": "This architecture supports creating and configuring an IBM Cloudant instance and database.",
             "features": [
               {
                 "title": "IBM Cloudant Dedicated instance on existing IBM Cloud Dedicated environment",
@@ -93,67 +93,67 @@
               }
             ]
           },
-          "configuration":[
+          "configuration": [
             {
-            "key": "provider_visibility",
-            "options": [
-              {
-                "displayname": "private",
-                "value": "private"
-              },
-              {
-                "displayname": "public",
-                "value": "public"
-              },
-              {
-                "displayname": "public-and-private",
-                "value": "public-and-private"
-              }
-            ]
-          },
-          {
-            "key": "access_tags"
-          },
-          {
-            "key": "allow_credentials"
-          },
-          {
-            "key": "capacity"
-          },
-          {
-            "key": "database_config"
-          },
-          {
-            "key": "enable_cors"
-          },
-          {
-            "key": "environment_crn"
-          },
-          {
-            "key": "existing_resource_group"
-          },
-          {
-            "key": "ibmcloud_api_key"
-          },
-          {
-            "key": "include_data_events"
-          },
-          {
-            "key": "instance_name"
-          },
-          {
-            "key": "origins"
-          },
-          {
-            "key": "region"
-          },
-          {
-            "key": "resource_group_name"
-          },
-          {
-            "key": "tags"
-          }
-        ]
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
+              "key": "access_tags"
+            },
+            {
+              "key": "allow_credentials"
+            },
+            {
+              "key": "capacity"
+            },
+            {
+              "key": "database_config"
+            },
+            {
+              "key": "enable_cors"
+            },
+            {
+              "key": "environment_crn"
+            },
+            {
+              "key": "existing_resource_group"
+            },
+            {
+              "key": "ibmcloud_api_key"
+            },
+            {
+              "key": "include_data_events"
+            },
+            {
+              "key": "instance_name"
+            },
+            {
+              "key": "origins"
+            },
+            {
+              "key": "region"
+            },
+            {
+              "key": "resource_group_name"
+            },
+            {
+              "key": "tags"
+            }
+          ]
         }
       ]
     }
