@@ -9,7 +9,8 @@
         "target_terraform",
         "terraform",
         "solution",
-        "data_management"
+        "data_management",
+        "converged_infra"
       ],
       "keywords": [
         "cloudant",
