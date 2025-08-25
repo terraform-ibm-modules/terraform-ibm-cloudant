@@ -2,6 +2,11 @@ variable "region" {
   type        = string
   description = "The IBM Cloud region where the Cloudant instance will be provisioned."
   default     = "us-south"
+
+  validation {
+    condition     = contains(["us-south", "us-east", "in-che", "au-syd", "br-sao", "ca-tor", "eu-de", "eu-gb", "eu-es", "jp-osa", "jp-tok"], var.region)
+    error_message = "Valid regions: us-south, us-east, in-che, au-syd, br-sao, ca-tor, eu-de, eu-gb, eu-es, jp-osa, jp-tok."
+  }
 }
 
 variable "plan" {
