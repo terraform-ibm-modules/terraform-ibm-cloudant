@@ -87,7 +87,7 @@
               {
                 "diagram": {
                   "caption": "IBM Cloudant Dedicated",
-                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/main/reference-architecture/dedicated_cloudant.svg",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/main/reference-architectures/dedicated_cloudant.svg",
                   "type": "image/svg+xml"
                 },
                 "description": "This architecture supports creating and configuring an IBM Cloudant instance and database in an existing IBM Dedicated environment."
