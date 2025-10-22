@@ -128,7 +128,14 @@
               "key": "enable_cors"
             },
             {
-              "key": "environment_crn"
+              "key": "environment_crn",
+              "value_constraints": [
+                {
+                  "type": "regex",
+                  "description": "The value provided for 'environment_crn' is not valid.",
+                  "value": "^__NULL__$|^crn:(.*:){3}(kms|hs-crypto):(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$"
+                }
+              ]
             },
             {
               "key": "existing_resource_group"
