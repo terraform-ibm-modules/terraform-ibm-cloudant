@@ -87,13 +87,6 @@ variable "environment_crn" {
   description = "Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance"
   type        = string
   default     = null
-  validation {
-    condition = anytrue([
-      can(regex("^crn:(.*:){3}cloudantnosqldb:(.*:){2}[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}::$", var.environment_crn)),
-      var.environment_crn == null,
-    ])
-    error_message = "The provided environment CRN in the input 'environment_crn' in not valid."
-  }
 }
 
 variable "service_endpoints" {
