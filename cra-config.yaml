@@ -7,5 +7,5 @@ CRA_TARGETS:
     CRA_ENVIRONMENT_VARIABLES:
       TF_VAR_resource_group_name: "terraform-ibm-cloudant"
       TF_VAR_instance_name: "mock"
-      TF_VAR_environment_crn: "test-env-crn"
+      TF_VAR_environment_crn: "crn:v1:bluemix:public:cloudantnosqldb:us-south:a/abac0df06b644a9cabc6e44f55b3880e:7c88e3f2-4412-4f45-b613-bae10b1e103c::"
       TF_VAR_provider_visibility: "public"
