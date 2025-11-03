@@ -6,13 +6,13 @@ variable "ibmcloud_api_key" {
 
 variable "region" {
   type        = string
-  description = "The IBM Cloud region where the instance of IBM Cloudant is provisioned."
+  description = "The IBM Cloud region where the instance of IBM Cloudant is provisioned. [Learn more](https://terraform-ibm-modules.github.io/documentation/#/region) about how to select different regions for different services."
   default     = "us-south"
 }
 
-variable "existing_resource_group" {
+variable "use_existing_resource_group" {
   type        = bool
-  description = "Whether to use an existing resource group."
+  description = "Whether to use an existing resource group or not."
   default     = false
 }
 
@@ -21,7 +21,7 @@ variable "resource_group_name" {
   description = "The name of a new or an existing resource group in which to provision the Cloudant instance in."
 }
 
-variable "instance_name" {
+variable "cloudant_instance_name" {
   description = "The name of the IBM Cloudant instance."
   type        = string
 }
@@ -50,7 +50,7 @@ variable "include_data_events" {
   default     = false
 }
 
-variable "capacity" {
+variable "throughput_capacity" {
   type        = number
   description = "The number of blocks of throughput units. See [Provisioned throughput capacity](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity)."
   default     = 1
@@ -58,13 +58,13 @@ variable "capacity" {
 
 variable "access_tags" {
   type        = list(string)
-  description = "The list of access tags to apply to the IBM Cloudant instance."
+  description = "The list of access tags to apply to this IBM Cloudant instance."
   default     = []
 }
 
-variable "tags" {
+variable "resource_tags" {
   type        = list(string)
-  description = "The list of resource tags to apply to The IBM Cloudant instance."
+  description = "The list of resource tags to apply to this IBM Cloudant instance."
   default     = []
 }
 
@@ -86,15 +86,14 @@ variable "database_config" {
     partitioned = optional(bool)
     shards      = optional(number)
   }))
-
-  description = "The databases to create in the IBM Cloudant instance with options to create partitions and shards."
+  description = "List of databases to create in the IBM Cloudant instance with options to create partitions and shards."
   default     = []
 }
+
 variable "provider_visibility" {
   description = "Set the visibility value for the IBM terraform provider. Supported values are `public`, `private`, `public-and-private`. [Learn more](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/guides/custom-service-endpoints)."
   type        = string
   default     = "private"
-
   validation {
     condition     = contains(["public", "private", "public-and-private"], var.provider_visibility)
     error_message = "Invalid visibility option. Allowed values are 'public', 'private', or 'public-and-private'."
