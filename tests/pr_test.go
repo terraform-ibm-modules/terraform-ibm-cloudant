@@ -76,11 +76,11 @@ func TestRunDedicatedSolution(t *testing.T) {
 		"ibmcloud_api_key": options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"],
 		"access_tags":      permanentResources["accessTags"],
 		// crn of the dedicated host
-		"environment_crn":         permanentResources["dedicatedHostCrn"],
+		"environment_crn":             permanentResources["dedicatedHostCrn"],
 		"use_existing_resource_group": true,
-		"provider_visibility":     "public",
-		"resource_group_name":     options.ResourceGroup,
-		"cloudant_instance_name":           options.Prefix,
+		"provider_visibility":         "public",
+		"resource_group_name":         options.ResourceGroup,
+		"cloudant_instance_name":      options.Prefix,
 		"database_config": []map[string]interface{}{
 			{
 				"db":          "cloudant-dedicated-db",
