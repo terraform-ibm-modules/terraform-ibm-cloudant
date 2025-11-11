@@ -55,15 +55,6 @@
           "name": "dedicated",
           "install_type": "fullstack",
           "working_directory": "solutions/dedicated",
-          "compliance": {
-            "authority": "scc-v3",
-            "profiles": [
-              {
-                "profile_name": "IBM Cloud Framework for Financial Services",
-                "profile_version": "1.7.0"
-              }
-            ]
-          },
           "iam_permissions": [
             {
               "role_crns": [
@@ -208,7 +199,8 @@
               "key": "tags"
             }
           ],
-          "terraform_version": "1.10.5"
+          "terraform_version": "1.12.2",
+          "ignore_readme": true
         }
       ]
     }
