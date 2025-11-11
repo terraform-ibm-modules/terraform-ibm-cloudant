@@ -77,10 +77,10 @@ func TestRunDedicatedSolution(t *testing.T) {
 		"access_tags":      permanentResources["accessTags"],
 		// crn of the dedicated host
 		"environment_crn":         permanentResources["dedicatedHostCrn"],
-		"existing_resource_group": true,
+		"use_existing_resource_group": true,
 		"provider_visibility":     "public",
 		"resource_group_name":     options.ResourceGroup,
-		"instance_name":           options.Prefix,
+		"cloudant_instance_name":           options.Prefix,
 		"database_config": []map[string]interface{}{
 			{
 				"db":          "cloudant-dedicated-db",
