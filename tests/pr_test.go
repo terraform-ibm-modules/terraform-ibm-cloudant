@@ -62,40 +62,6 @@ func TestRunUpgradeExample(t *testing.T) {
 	}
 }
 
-func TestRunDedicatedSolution(t *testing.T) {
-	t.Parallel()
-
-	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
-		Testing:       t,
-		TerraformDir:  "solutions/dedicated",
-		Region:        "us-south", // Locking into us-south since that is where the dedicated host is provisioned
-		Prefix:        "dedicated",
-		ResourceGroup: resourceGroup,
-	})
-
-	options.TerraformVars = map[string]interface{}{
-		"ibmcloud_api_key": options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"],
-		"access_tags":      permanentResources["accessTags"],
-		// crn of the dedicated host
-		"environment_crn":         permanentResources["dedicatedHostCrn"],
-		"existing_resource_group": true,
-		"provider_visibility":     "public",
-		"resource_group_name":     options.ResourceGroup,
-		"instance_name":           options.Prefix,
-		"database_config": []map[string]interface{}{
-			{
-				"db":          "cloudant-dedicated-db",
-				"partitioned": false,
-				"shards":      16,
-			},
-		},
-	}
-
-	output, err := options.RunTestConsistency()
-	assert.Nil(t, err, "This should not have errored")
-	assert.NotNil(t, output, "Expected some output")
-}
-
 func setupDedicatedSolutionOptions(t *testing.T, prefix string) *testschematic.TestSchematicOptions {
 	region := "us-south" // Locking into us-south since that is where the dedicated host is provisioned
 
