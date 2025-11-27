@@ -14,6 +14,8 @@ import (
 
 const resourceGroup = "geretain-test-cloudant"
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
+const dedicatedTerraformDir = "solutions/dedicated"
+const modulesTerraformDir = "modules/fscloud"
 
 var permanentResources map[string]interface{}
 
@@ -66,9 +68,14 @@ func setupDedicatedSolutionOptions(t *testing.T, prefix string) *testschematic.T
 	region := "us-south" // Locking into us-south since that is where the dedicated host is provisioned
 
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
-		Testing:                t,
-		Prefix:                 prefix,
-		TemplateFolder:         "solutions/dedicated",
+		Testing: t,
+		Prefix:  prefix,
+		TarIncludePatterns: []string{
+			"*.tf",
+			modulesTerraformDir + "/*.tf",
+			dedicatedTerraformDir + "/*.tf",
+		},
+		TemplateFolder:         dedicatedTerraformDir,
 		ResourceGroup:          resourceGroup,
 		DeleteWorkspaceOnFail:  false,
 		WaitJobCompleteMinutes: 60,
@@ -79,14 +86,16 @@ func setupDedicatedSolutionOptions(t *testing.T, prefix string) *testschematic.T
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
 		{Name: "region", Value: region, DataType: "string"},
-		{Name: "resource_group_name", Value: options.ResourceGroup, DataType: "string"},
+		{Name: "resource_group_name", Value: resourceGroup, DataType: "string"},
 		{Name: "existing_resource_group", Value: true, DataType: "bool"},
-		{Name: "provider_visibility", Value: "public", DataType: "string"},
-		{Name: "instance_name", Value: prefix, DataType: "string"},
+		{Name: "instance_name", Value: options.Prefix, DataType: "string"},
 		{Name: "access_tags", Value: permanentResources["accessTags"], DataType: "list(string)"},
 		{Name: "environment_crn", Value: permanentResources["dedicatedHostCrn"], DataType: "string"}, // crn of the dedicated host
-		// database_config declared with optional fields, no default value
-		{Name: "database_config", DataType: "list(object({ db = string, partitioned = optional(bool), shards = optional(number) }))"},
+		{
+			Name:     "database_config",
+			Value:    []map[string]interface{}{{"db": "cloudant-dedicated-db", "partitioned": false, "shards": 16}},
+			DataType: "list(object)",
+		},
 	}
 
 	return options
@@ -96,7 +105,6 @@ func setupDedicatedSolutionOptions(t *testing.T, prefix string) *testschematic.T
 func TestRunDedicatedSolutionSchematic(t *testing.T) {
 	t.Parallel()
 
-	// Use the schematic-compatible setup
 	options := setupDedicatedSolutionOptions(t, "dedicated")
 
 	// Run the schematic test
@@ -108,10 +116,7 @@ func TestRunDedicatedSolutionSchematic(t *testing.T) {
 func TestRunDedicatedSolutionSchematicUpgrade(t *testing.T) {
 	t.Parallel()
 
-	// Use schematic-compatible setup for upgrade
-	options := setupDedicatedSolutionOptions(t, "dedicated-upgrade")
-
-	// Upgrade-specific configurations
+	options := setupDedicatedSolutionOptions(t, "dedicated-upg")
 	options.CheckApplyResultForUpgrade = true
 
 	// Run the upgrade test
