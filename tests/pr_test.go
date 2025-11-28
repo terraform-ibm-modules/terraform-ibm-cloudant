@@ -17,6 +17,20 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
 
+var validRegions = []string{
+	"in-che",
+	"au-syd",
+	"br-sao",
+	"ca-tor",
+	"eu-de",
+	"eu-gb",
+	"eu-es",
+	"jp-osa",
+	"jp-tok",
+	"us-south",
+	"us-east",
+}
+
 var permanentResources map[string]interface{}
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
@@ -31,9 +45,11 @@ func TestMain(m *testing.M) {
 }
 
 func setupOptions(t *testing.T, prefix string) *testhelper.TestOptions {
+	region := validRegions[common.CryptoIntn(len(validRegions))]
 	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
 		Testing:       t,
 		TerraformDir:  "examples/complete",
+		Region:        region,
 		Prefix:        prefix,
 		ResourceGroup: resourceGroup,
 		TerraformVars: map[string]interface{}{
