@@ -18,7 +18,7 @@ const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
 
 var validRegions = []string{
-	"in-che",
+	"che01",
 	"au-syd",
 	"br-sao",
 	"ca-tor",
