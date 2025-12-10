@@ -18,7 +18,6 @@ const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
 
 var validRegions = []string{
-	"che01",
 	"au-syd",
 	"br-sao",
 	"ca-tor",
@@ -29,6 +28,7 @@ var validRegions = []string{
 	"jp-tok",
 	"us-south",
 	"us-east",
+	"eu-fr2",
 }
 
 var permanentResources map[string]interface{}
