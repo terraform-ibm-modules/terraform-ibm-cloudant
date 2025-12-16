@@ -29,7 +29,6 @@ var validRegions = []string{
 	"jp-tok",
 	"us-south",
 	"us-east",
-	"eu-fr2",
 }
 
 var permanentResources map[string]interface{}
