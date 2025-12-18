@@ -4,8 +4,8 @@ variable "region" {
   default     = "us-south"
 
   validation {
-    condition     = contains(["us-south", "us-east", "che01", "au-syd", "br-sao", "ca-tor", "eu-de", "eu-gb", "eu-es", "jp-osa", "jp-tok"], var.region)
-    error_message = "Valid regions: us-south, us-east, che01, au-syd, br-sao, ca-tor, eu-de, eu-gb, eu-es, jp-osa, jp-tok."
+    condition     = contains(["us-south", "us-east", "che01", "au-syd", "br-sao", "ca-tor", "eu-de", "eu-gb", "eu-es", "eu-fr2", "jp-osa", "jp-tok"], var.region)
+    error_message = "Valid regions: us-south, us-east, che01, au-syd, br-sao, ca-tor, eu-de, eu-gb, eu-es, eu-fr2, jp-osa, jp-tok."
   }
 }
 
