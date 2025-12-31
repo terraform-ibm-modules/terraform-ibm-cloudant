@@ -59,6 +59,7 @@
           "name": "dedicated",
           "install_type": "fullstack",
           "working_directory": "solutions/dedicated",
+          "short_description": "Ideal for users who want flexibility with a reliable starting point.",
           "iam_permissions": [
             {
               "role_crns": [
@@ -117,7 +118,17 @@
               "key": "capacity"
             },
             {
-              "key": "database_config"
+              "key": "database_config",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
             },
             {
               "key": "enable_cors"
