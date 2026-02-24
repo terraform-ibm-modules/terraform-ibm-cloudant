@@ -87,7 +87,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | Add access management tags to the Cloudant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types) | `list(string)` | `[]` | no |
+| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | Add access management tags to the Cloudant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#create-access-console). | `list(string)` | `[]` | no |
 | <a name="input_allow_credentials"></a> [allow\_credentials](#input\_allow\_credentials) | Boolean value to allow authentication credentials. This will only be used if enable\_cors is set to true. | `bool` | `true` | no |
 | <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
 | <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br/>    db          = string<br/>    partitioned = optional(bool)<br/>    shards      = optional(number)<br/>  }))</pre> | `[]` | no |
@@ -101,7 +101,7 @@ No modules.
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the instance will be grouped. | `string` | n/a | yes |
 | <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private' | `string` | `"public-and-private"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to be associated to cloudant instance | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the Cloudant instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 
 ### Outputs
 
