@@ -73,7 +73,7 @@ variable "capacity" {
 
 variable "access_tags" {
   type        = list(string)
-  description = "List of access tags to be associated with the Cloudant instance"
+  description = "Add access management tags to the Cloudant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)"
   default     = []
 }
 

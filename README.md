@@ -81,12 +81,13 @@ No modules.
 | [ibm_cloudant.cloudant_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloudant) | resource |
 | [ibm_cloudant_database.cloudant_database](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloudant_database) | resource |
 | [ibm_resource_tag.access_tags](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_tag) | resource |
+| [ibm_iam_access_tag.access_tag](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_access_tag) | data source |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | List of access tags to be associated with the Cloudant instance | `list(string)` | `[]` | no |
+| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | Add access management tags to the Cloudant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types) | `list(string)` | `[]` | no |
 | <a name="input_allow_credentials"></a> [allow\_credentials](#input\_allow\_credentials) | Boolean value to allow authentication credentials. This will only be used if enable\_cors is set to true. | `bool` | `true` | no |
 | <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
 | <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br/>    db          = string<br/>    partitioned = optional(bool)<br/>    shards      = optional(number)<br/>  }))</pre> | `[]` | no |
