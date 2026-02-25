@@ -42,7 +42,13 @@ resource "ibm_cloudant" "cloudant_instance" {
 # Attach access tags
 ##############################################################################
 
+data "ibm_iam_access_tag" "access_tag" {
+  for_each = length(var.access_tags) != 0 ? toset(var.access_tags) : []
+  name     = each.value
+}
+
 resource "ibm_resource_tag" "access_tags" {
+  depends_on  = [data.ibm_iam_access_tag.access_tag]
   count       = length(var.access_tags) == 0 ? 0 : 1
   resource_id = ibm_cloudant.cloudant_instance.crn
   tags        = var.access_tags
