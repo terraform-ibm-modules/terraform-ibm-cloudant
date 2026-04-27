@@ -66,3 +66,15 @@ output "db_map" {
   description = "A map of the Cloudant database names created and their respective IDs"
   value       = module.create_cloudant.db_map
 }
+
+output "service_credentials_json" {
+  description = "Service credentials json map"
+  value       = module.create_cloudant.service_credentials_json
+  sensitive   = true
+}
+
+output "service_credentials_object" {
+  description = "Service credentials object"
+  value       = module.create_cloudant.service_credentials_object
+  sensitive   = true
+}
