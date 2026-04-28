@@ -38,19 +38,19 @@ module "create_cloudant" {
   enable_cors       = true # on setting enable_cors to true, the default values of allow_credentials and origins will be used.
   service_credential_names = [
     {
-      name     = "reader"
+      name     = "reader-creds"
       endpoint = "public"
       role     = "Reader"
     },
     {
-      name     = "test"
+      name     = "manager-creds"
       endpoint = "public"
       role     = "Manager"
     },
     {
-      name     = "test"
+      name     = "writer-creds"
       endpoint = "public"
-      role     = "Manager"
+      role     = "Writer"
     }
   ]
 }
