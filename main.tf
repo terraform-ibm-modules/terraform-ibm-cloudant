@@ -90,12 +90,8 @@ locals {
   } : null
 
   service_credentials_object = length(var.service_credential_names) > 0 ? {
-    host = ibm_resource_key.service_credentials[
-      var.service_credential_names[0].name
-    ].credentials["host"]
-    url = ibm_resource_key.service_credentials[
-      var.service_credential_names[0].name
-    ].credentials["url"]
+    host = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["host"]
+    url  = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["url"]
     credentials = {
       for rk in ibm_resource_key.service_credentials :
       rk.name => merge(

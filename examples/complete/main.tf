@@ -51,6 +51,16 @@ module "create_cloudant" {
       name     = "cloudant_writer"
       endpoint = "public"
       role     = "Writer"
+    },
+    {
+      name     = "cloudant_monitor"
+      endpoint = "public"
+      role     = "Monitor"
+    },
+    {
+      name     = "cloudant_checkpointer"
+      endpoint = "public"
+      role     = "Checkpointer"
     }
   ]
 }
