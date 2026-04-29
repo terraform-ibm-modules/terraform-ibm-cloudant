@@ -87,7 +87,7 @@ locals {
   service_credentials_json = length(var.service_credential_names) > 0 ? {
     for service_credential in ibm_resource_key.service_credentials :
     service_credential["name"] => service_credential["credentials_json"]
-  } : {}
+  } : null
 
   service_credentials_object = length(var.service_credential_names) > 0 ? {
     host = ibm_resource_key.service_credentials[
@@ -116,5 +116,5 @@ locals {
         } : {}
       )
     }
-  } : {}
+  } : null
 }
