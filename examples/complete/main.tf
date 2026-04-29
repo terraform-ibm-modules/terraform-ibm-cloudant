@@ -43,7 +43,7 @@ module "create_cloudant" {
       role     = "Reader"
     },
     {
-      name     = "manager-creds"
+      name     = "cloudant_manager"
       endpoint = "public"
       role     = "Manager"
     },
