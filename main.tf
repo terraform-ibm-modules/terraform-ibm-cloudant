@@ -67,3 +67,50 @@ resource "ibm_cloudant_database" "cloudant_database" {
   instance_crn = ibm_cloudant.cloudant_instance.crn
 
 }
+
+##############################################################################
+# Service Credentials
+##############################################################################
+
+resource "ibm_resource_key" "service_credentials" {
+  for_each             = { for key in var.service_credential_names : key.name => key }
+  name                 = each.key
+  role                 = each.value.role
+  resource_instance_id = ibm_cloudant.cloudant_instance.id
+  parameters = {
+    service-endpoints = each.value.endpoint
+  }
+}
+
+locals {
+  # used for output only
+  service_credentials_json = length(var.service_credential_names) > 0 ? {
+    for service_credential in ibm_resource_key.service_credentials :
+    service_credential["name"] => service_credential["credentials_json"]
+  } : null
+
+  service_credentials_object = length(var.service_credential_names) > 0 ? {
+    host = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["host"]
+    url  = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["url"]
+    credentials = {
+      for rk in ibm_resource_key.service_credentials :
+      rk.name => merge(
+        {
+          apikey                 = rk.credentials["apikey"]
+          host                   = rk.credentials["host"]
+          url                    = rk.credentials["url"]
+          username               = rk.credentials["username"]
+          iam_apikey_description = rk.credentials["iam_apikey_description"]
+          iam_apikey_id          = rk.credentials["iam_apikey_id"]
+          iam_apikey_name        = rk.credentials["iam_apikey_name"]
+          iam_role_crn           = rk.credentials["iam_role_crn"]
+          iam_serviceid_crn      = rk.credentials["iam_serviceid_crn"]
+        },
+        var.legacy_credentials ? {
+          password = rk.credentials["password"]
+          port     = rk.credentials["port"]
+        } : {}
+      )
+    }
+  } : null
+}

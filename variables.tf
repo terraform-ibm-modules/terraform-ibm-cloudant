@@ -115,3 +115,39 @@ variable "database_config" {
   description = "(Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance"
   default     = []
 }
+
+variable "service_credential_names" {
+  type = list(object({
+    name     = string
+    role     = optional(string, "Reader")
+    endpoint = optional(string, "private")
+  }))
+  description = "List of service credentials to create for the cloudant database, including name and optionally role and endpoint type."
+  default     = []
+
+  validation {
+    condition     = alltrue([for credential in var.service_credential_names : contains(["Manager", "Writer", "Reader", "Monitor", "Checkpointer"], credential.role)])
+    error_message = "`service_credential_names` role must be one of the following: 'Manager', 'Writer', 'Reader', 'Monitor' or 'Checkpointer'."
+  }
+
+  validation {
+    condition     = alltrue([for credential in var.service_credential_names : contains(["public", "private"], credential.endpoint)])
+    error_message = "`service_credential_names` endpoint must be `public` or `private`."
+  }
+
+  validation {
+    condition = !(
+      var.service_endpoints == "private" &&
+      anytrue([for credential in var.service_credential_names : credential.endpoint == "public"])
+    )
+    error_message = "When `service_endpoints` is set to `private`, `service_credential_names.endpoint` value cannot be `public`."
+  }
+
+  validation {
+    condition = !(
+      var.service_endpoints == "public" &&
+      anytrue([for credential in var.service_credential_names : credential.endpoint == "private"])
+    )
+    error_message = "When `service_endpoints` is set to `public`, `service_credential_names.endpoint` value cannot be `private`."
+  }
+}
