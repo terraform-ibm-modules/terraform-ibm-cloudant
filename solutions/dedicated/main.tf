@@ -1,6 +1,10 @@
 module "resource_group" {
   source                       = "terraform-ibm-modules/resource-group/ibm"
+<<<<<<< HEAD
   version                      = "1.5.0"
+=======
+  version                      = "1.6.0"
+>>>>>>> 0b913e47cc5e1431e1e0d0902199c60b89663380
   resource_group_name          = var.existing_resource_group == false ? var.resource_group_name : null
   existing_resource_group_name = var.existing_resource_group == true ? var.resource_group_name : null
 }

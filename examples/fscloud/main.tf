@@ -4,7 +4,11 @@
 
 module "resource_group" {
   source  = "terraform-ibm-modules/resource-group/ibm"
+<<<<<<< HEAD
   version = "1.5.0"
+=======
+  version = "1.6.0"
+>>>>>>> 0b913e47cc5e1431e1e0d0902199c60b89663380
   # if an existing resource group is not set (null) create a new one using prefix
   resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
   existing_resource_group_name = var.resource_group
