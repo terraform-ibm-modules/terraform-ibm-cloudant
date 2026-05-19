@@ -100,6 +100,7 @@ No modules.
 |------|------|
 | [ibm_cloudant.cloudant_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloudant) | resource |
 | [ibm_cloudant_database.cloudant_database](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cloudant_database) | resource |
+| [ibm_resource_key.service_credentials](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_key) | resource |
 | [ibm_resource_tag.access_tags](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_tag) | resource |
 | [ibm_iam_access_tag.access_tag](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_access_tag) | data source |
 
@@ -120,6 +121,7 @@ No modules.
 | <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. Standard or lite. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the instance will be grouped. | `string` | n/a | yes |
+| <a name="input_service_credential_names"></a> [service\_credential\_names](#input\_service\_credential\_names) | List of service credentials to create for the cloudant database, including name and optionally role and endpoint type. | <pre>list(object({<br/>    name     = string<br/>    role     = optional(string, "Reader")<br/>    endpoint = optional(string, "private")<br/>  }))</pre> | `[]` | no |
 | <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private' | `string` | `"public-and-private"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the Cloudant instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 
@@ -139,6 +141,8 @@ No modules.
 | <a name="output_public_endpoint"></a> [public\_endpoint](#output\_public\_endpoint) | The external public endpoint |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The resource group name in which resource is provisioned |
 | <a name="output_resource_keys_url"></a> [resource\_keys\_url](#output\_resource\_keys\_url) | The relative path to the resource keys for the instance |
+| <a name="output_service_credentials_json"></a> [service\_credentials\_json](#output\_service\_credentials\_json) | Service credentials json map |
+| <a name="output_service_credentials_object"></a> [service\_credentials\_object](#output\_service\_credentials\_object) | Service credentials object |
 | <a name="output_state"></a> [state](#output\_state) | The current state of the instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

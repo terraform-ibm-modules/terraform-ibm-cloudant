@@ -36,6 +36,33 @@ module "create_cloudant" {
   plan              = "standard"
   tags              = var.resource_tags
   enable_cors       = true # on setting enable_cors to true, the default values of allow_credentials and origins will be used.
+  service_credential_names = [
+    {
+      name     = "cloudant_reader"
+      endpoint = "public"
+      role     = "Reader"
+    },
+    {
+      name     = "cloudant_manager"
+      endpoint = "public"
+      role     = "Manager"
+    },
+    {
+      name     = "cloudant_writer"
+      endpoint = "public"
+      role     = "Writer"
+    },
+    {
+      name     = "cloudant_monitor"
+      endpoint = "public"
+      role     = "Monitor"
+    },
+    {
+      name     = "cloudant_checkpointer"
+      endpoint = "public"
+      role     = "Checkpointer"
+    }
+  ]
 }
 
 ##############################################################################
@@ -84,18 +111,18 @@ resource "ibm_iam_access_group_members" "accgroupmem" {
 module "secrets_manager" {
   count                = var.existing_sm_instance_guid == null ? 1 : 0
   source               = "terraform-ibm-modules/secrets-manager/ibm"
-  version              = "2.14.0"
+  version              = "2.15.2"
   resource_group_id    = module.resource_group.resource_group_id
   region               = local.sm_region
   secrets_manager_name = "${var.prefix}-secrets-manager"
   sm_service_plan      = "trial"
-  sm_tags              = var.resource_tags
+  resource_tags        = var.resource_tags
 }
 
 # Add a Secrets Group to the secret manager instance
 module "secrets_manager_group" {
   source                   = "terraform-ibm-modules/secrets-manager-secret-group/ibm"
-  version                  = "1.5.0"
+  version                  = "1.5.3"
   region                   = local.sm_region
   secrets_manager_guid     = local.sm_guid
   secret_group_name        = "${var.prefix}-cloudant-secrets"

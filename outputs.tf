@@ -66,3 +66,15 @@ output "db_map" {
   description = "A map of the Cloudant database names created and their respective IDs"
   value       = { for database in ibm_cloudant_database.cloudant_database : database.db => database.id }
 }
+
+output "service_credentials_json" {
+  description = "Service credentials json map"
+  value       = local.service_credentials_json
+  sensitive   = true
+}
+
+output "service_credentials_object" {
+  description = "Service credentials object"
+  value       = local.service_credentials_object
+  sensitive   = true
+}
