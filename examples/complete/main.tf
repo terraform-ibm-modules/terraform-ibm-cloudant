@@ -76,6 +76,9 @@ resource "ibm_iam_access_group" "access_group" {
 }
 
 resource "ibm_iam_access_group_policy" "distributed_access_policy" {
+  # Ensure policy is deleted before members are removed to prevent race condition
+  # where IBM Cloud auto-deletes policies on empty access groups
+  depends_on      = [ibm_iam_access_group_members.accgroupmem]
   access_group_id = ibm_iam_access_group.access_group.id
   roles           = ["Manager", "Administrator"]
 
