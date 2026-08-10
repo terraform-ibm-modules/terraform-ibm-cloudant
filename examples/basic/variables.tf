@@ -16,6 +16,12 @@ variable "region" {
   default     = "us-south"
 }
 
+variable "plan" {
+  type        = string
+  description = "The plan for the Cloudant instance. Standard or lite."
+  default     = "standard"
+}
+
 variable "prefix" {
   type        = string
   description = "Prefix to append to all resources created by this example"
@@ -32,4 +38,10 @@ variable "resource_tags" {
   type        = list(string)
   description = "Add user resource tags to the Cloudant instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)."
   default     = []
+}
+
+variable "service_endpoints" {
+  type        = string
+  description = "Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private'"
+  default     = "public-and-private"
 }

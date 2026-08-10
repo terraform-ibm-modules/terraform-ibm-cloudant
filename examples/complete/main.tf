@@ -33,7 +33,7 @@ module "create_cloudant" {
   resource_group_id = module.resource_group.resource_group_id
   instance_name     = "${var.prefix}-cloudant"
   region            = local.sm_region
-  plan              = "standard-gen2"
+  plan              = "standard"
   tags              = var.resource_tags
   enable_cors       = true # on setting enable_cors to true, the default values of allow_credentials and origins will be used.
   service_credential_names = [

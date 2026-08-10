@@ -7,10 +7,19 @@ locals {
   is_gen2    = can(regex("-gen2$", var.plan))
   is_classic = !local.is_gen2
 
-  # Gen2 URLs are available in extensions under different keys (with https:// already included)
   gen2_public_endpoint  = local.is_gen2 ? (contains(keys(ibm_cloudant.cloudant_instance.extensions), "dataservices.connection.public_endpoint_url") ? ibm_cloudant.cloudant_instance.extensions["dataservices.connection.public_endpoint_url"] : null) : null
   gen2_private_endpoint = local.is_gen2 ? (contains(keys(ibm_cloudant.cloudant_instance.extensions), "dataservices.connection.vpe_url") ? ibm_cloudant.cloudant_instance.extensions["dataservices.connection.vpe_url"] : null) : null
   gen2_instance_url     = local.gen2_public_endpoint != null ? "${local.gen2_public_endpoint}/dashboard.html" : null
+
+  # Map Cloudant role names to their correct IAM role CRNs.
+  # Monitor and Checkpointer are Cloudant-specific service roles; Reader/Writer/Manager are IAM service roles.
+  cloudant_role_crns = {
+    Reader       = "crn:v1:bluemix:public:iam::::serviceRole:Reader"
+    Writer       = "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+    Manager      = "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+    Monitor      = "crn:v1:bluemix:public:cloudantnosqldb::::serviceRole:Monitor"
+    Checkpointer = "crn:v1:bluemix:public:cloudantnosqldb::::serviceRole:Checkpointer"
+  }
 }
 
 ##############################################################################
@@ -92,7 +101,7 @@ resource "ibm_resource_key" "service_credentials" {
   name                 = each.key
   role                 = local.is_classic ? each.value.role : null
   resource_instance_id = ibm_cloudant.cloudant_instance.id
-  parameters           = local.is_gen2 ? { role_crn = "crn:v1:bluemix:public:iam::::role:${each.value.role}" } : { service-endpoints = each.value.endpoint }
+  parameters           = local.is_gen2 ? { role_crn = local.cloudant_role_crns[each.value.role] } : { service-endpoints = each.value.endpoint, role_crn = local.cloudant_role_crns[each.value.role] }
 }
 
 locals {
