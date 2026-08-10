@@ -17,6 +17,7 @@ const resourceGroup = "geretain-test-cloudant"
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
+const basicExampleTerraformDir = "examples/basic"
 
 var validRegions = []string{
 	"che01",
