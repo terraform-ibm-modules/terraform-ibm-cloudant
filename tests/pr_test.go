@@ -32,6 +32,11 @@ var validRegions = []string{
 	"us-east",
 }
 
+var gen2Regions = []string{
+	"eu-de",
+	"us-east",
+}
+
 var permanentResources map[string]interface{}
 
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
@@ -147,6 +152,7 @@ func TestRunBasicGen2Example(t *testing.T) {
 	t.Parallel()
 
 	// set up a schematics test
+	region := gen2Regions[common.CryptoIntn(len(gen2Regions))]
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing:                t,
 		TarIncludePatterns:     []string{"*.tf", fmt.Sprintf("%s/*.tf", basicExampleTerraformDir)},
@@ -159,7 +165,7 @@ func TestRunBasicGen2Example(t *testing.T) {
 
 	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
-		{Name: "region", Value: options.Region, DataType: "string"},
+		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
 		{Name: "plan", Value: "standard-gen2", DataType: "string"},
 		{Name: "resource_group", Value: resourceGroup, DataType: "string"},
