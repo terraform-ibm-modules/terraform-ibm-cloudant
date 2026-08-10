@@ -26,4 +26,11 @@ module "create_cloudant" {
     partitioned = false
     shards      = 16
   }]
+  service_credential_names = [
+    {
+      name     = "cloudant_reader"
+      endpoint = "private"
+      role     = "Reader"
+    }
+  ]
 }

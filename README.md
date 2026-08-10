@@ -88,7 +88,7 @@ You need the following permissions to run this module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.88.0, < 3.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 2.5.0, < 3.0.0 |
 
 ### Modules
 
@@ -113,10 +113,10 @@ No modules.
 | <a name="input_capacity"></a> [capacity](#input\_capacity) | Number of blocks of throughput units. See https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public#provisioned-throughput-capacity. Capacity modification is not supported for lite plan. | `number` | `1` | no |
 | <a name="input_database_config"></a> [database\_config](#input\_database\_config) | (Optional, List) The databases with their corresponding partitioning and shards to be created in the cloudant instance | <pre>list(object({<br/>    db          = string<br/>    partitioned = optional(bool)<br/>    shards      = optional(number)<br/>  }))</pre> | `[]` | no |
 | <a name="input_enable_cors"></a> [enable\_cors](#input\_enable\_cors) | Boolean value to enable cross-origin resource sharing (CORS). | `bool` | `false` | no |
-| <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance | `string` | `null` | no |
-| <a name="input_include_data_events"></a> [include\_data\_events](#input\_include\_data\_events) | Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker. | `bool` | `false` | no |
+| <a name="input_environment_crn"></a> [environment\_crn](#input\_environment\_crn) | Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance. Only for GEN 1 dedicated hardware plan. | `string` | `null` | no |
+| <a name="input_include_data_events"></a> [include\_data\_events](#input\_include\_data\_events) | Include data event types in events sent to IBM Cloud Activity Tracker Event Routing for the Cloudant instance. If set to false, only management events will be sent. For Gen 2 instances this maps to the broker parameter `dataservices.cloudant.configuration.audit.data_events`. | `bool` | `false` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | The name of the Cloudant instance | `string` | n/a | yes |
-| <a name="input_legacy_credentials"></a> [legacy\_credentials](#input\_legacy\_credentials) | Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. | `bool` | `false` | no |
+| <a name="input_legacy_credentials"></a> [legacy\_credentials](#input\_legacy\_credentials) | Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. Only available for IBM Cloudant Gen 1. | `bool` | `false` | no |
 | <a name="input_origins"></a> [origins](#input\_origins) | An array of strings that contain allowed origin domains. This value is only used if enable\_cors is set to true. | `list(string)` | `[]` | no |
 | <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. Standard or lite. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
