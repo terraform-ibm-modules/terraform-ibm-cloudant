@@ -36,7 +36,7 @@ resource "ibm_cloudant" "cloudant_instance" {
   resource_group_id   = var.resource_group_id
   enable_cors         = var.enable_cors
   tags                = var.tags
-  service_endpoints   = local.is_classic ? var.service_endpoints : null
+  service_endpoints   = var.service_endpoints
   environment_crn     = var.environment_crn
 
   dynamic "cors_config" {

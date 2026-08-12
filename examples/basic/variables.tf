@@ -43,5 +43,5 @@ variable "resource_tags" {
 variable "service_endpoints" {
   type        = string
   description = "Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private'"
-  default     = "public-and-private"
+  default     = "private"
 }

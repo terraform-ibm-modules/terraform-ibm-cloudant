@@ -25,11 +25,6 @@ variable "plan" {
   }
 
   validation {
-    condition     = var.plan == "standard-gen2" ? contains(["eu-de", "us-east"], var.region) : true
-    error_message = "The 'standard-gen2' plan is only available in the 'eu-de' and 'us-east' region."
-  }
-
-  validation {
     condition     = var.plan == "standard-gen2" && var.environment_crn != null ? false : true
     error_message = "The 'standard-gen2' plan does not support dedicated hardware (environment_crn)."
   }
@@ -117,6 +112,11 @@ variable "service_endpoints" {
   validation {
     condition     = can(regex("public|public-and-private|private", var.service_endpoints))
     error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
+  }
+
+  validation {
+    condition     = local.is_classic ? true : var.service_endpoints == "private"
+    error_message = "`service_endpoints` must be `private` for Gen2 instances."
   }
 }
 
