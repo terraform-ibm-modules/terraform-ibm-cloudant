@@ -8,7 +8,7 @@
 [![Terraform Registry](https://img.shields.io/badge/terraform-registry-623CE4?logo=terraform)](https://registry.terraform.io/modules/terraform-ibm-modules/cloudant/ibm/latest)
 
 
-This module supports provisioning a instance of the IBM Cloudant service. With a Lite plan, the instance is provisioned on a multi-tenant environment. With a standard plan, the instance can be provisioned either on a multi-tenant or on a dedicated environment. For more information, see [Plans and provisioning](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public).
+This module supports provisioning a instance of the IBM Cloudant service. With a Lite plan, the instance is provisioned on a multi-tenant environment. With a standard plan, the instance can be provisioned either on a multi-tenant or on a dedicated environment. The module also supports the `standard-gen2` plan for Gen2 deployments. For more information, see [Plans and provisioning](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-ibm-cloud-public).
 
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
@@ -39,6 +39,7 @@ This module supports provisioning a instance of the IBM Cloudant service. With a
   <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions">Deployable Architectures</a>
     <ul>
       <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions/dedicated">IBM Cloudant Dedicated on IBM Cloud Dedicated</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions/fully-configurable-gen2">IBM Cloudant Fully Configurable Gen2</a></li>
     </ul>
   </li>
   <li><a href="#contributing">Contributing</a></li>

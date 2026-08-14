@@ -216,6 +216,180 @@
           ],
           "terraform_version": "1.12.2",
           "ignore_readme": true
+        },
+        {
+          "label": "Fully configurable Gen2",
+          "name": "fully-configurable-gen2",
+          "install_type": "fullstack",
+          "working_directory": "solutions/fully-configurable-gen2",
+          "short_description": "Configurable Cloudant Gen2 deployment with databases and service credentials.",
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "cloudantnosqldb"
+            }
+          ],
+          "architecture": {
+            "features": [
+              {
+                "title": "IBM Cloudant Gen2 instance",
+                "description": "Yes"
+              },
+              {
+                "title": "IBM Cloudant databases",
+                "description": "Yes"
+              },
+              {
+                "title": "IBM Cloudant service credentials",
+                "description": "Yes"
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "IBM Cloudant Fully Configurable Gen2",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/main/images/cloudant.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "This architecture supports creating and configuring an IBM Cloudant Gen2 instance, databases, and service credentials."
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
+              "key": "access_tags"
+            },
+            {
+              "key": "allow_credentials"
+            },
+            {
+              "key": "capacity"
+            },
+            {
+              "key": "database_config",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "enable_cors"
+            },
+            {
+              "key": "existing_resource_group"
+            },
+            {
+              "key": "ibmcloud_api_key"
+            },
+            {
+              "key": "include_data_events"
+            },
+            {
+              "key": "instance_name"
+            },
+            {
+              "key": "origins"
+            },
+            {
+              "key": "region",
+              "options": [
+                {
+                  "displayname": "Chennai (che01)",
+                  "value": "che01"
+                },
+                {
+                  "displayname": "Dallas (us-south)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "Sydney (au-syd)",
+                  "value": "au-syd"
+                },
+                {
+                  "displayname": "Sao Paolo (br-sao)",
+                  "value": "br-sao"
+                },
+                {
+                  "displayname": "Toronto (ca-tor)",
+                  "value": "ca-tor"
+                },
+                {
+                  "displayname": "Frankfurt (eu-de)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "London (eu-gb)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "Madrid (eu-es)",
+                  "value": "eu-es"
+                },
+                {
+                  "displayname": "Paris (eu-fr2)",
+                  "value": "eu-fr2"
+                },
+                {
+                  "displayname": "Osaka (jp-osa)",
+                  "value": "jp-osa"
+                },
+                {
+                  "displayname": "Tokyo (jp-tok)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "Washington DC (us-east)",
+                  "value": "us-east"
+                }
+              ]
+            },
+            {
+              "key": "resource_group_name"
+            },
+            {
+              "key": "service_credential_names",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "tags"
+            }
+          ],
+          "terraform_version": "1.12.2",
+          "ignore_readme": true
         }
       ]
     }

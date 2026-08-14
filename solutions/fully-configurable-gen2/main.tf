@@ -1,0 +1,25 @@
+module "resource_group" {
+  source                       = "terraform-ibm-modules/resource-group/ibm"
+  version                      = "1.6.1"
+  resource_group_name          = var.existing_resource_group == false ? var.resource_group_name : null
+  existing_resource_group_name = var.existing_resource_group == true ? var.resource_group_name : null
+}
+
+module "cloudant" {
+  source = "../.."
+
+  resource_group_id        = module.resource_group.resource_group_id
+  instance_name            = var.instance_name
+  region                   = var.region
+  plan                     = "standard-gen2"
+  tags                     = var.tags
+  access_tags              = var.access_tags
+  enable_cors              = var.enable_cors
+  allow_credentials        = var.allow_credentials
+  origins                  = var.origins
+  capacity                 = var.capacity
+  include_data_events      = var.include_data_events
+  database_config          = var.database_config
+  service_credential_names = var.service_credential_names
+
+}
