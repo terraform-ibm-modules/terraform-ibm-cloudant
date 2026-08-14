@@ -10,8 +10,6 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
 )
 
-const basicExampleTerraformDir = "examples/basic"
-
 func TestRunBasicExampleSchematics(t *testing.T) {
 	t.Parallel()
 

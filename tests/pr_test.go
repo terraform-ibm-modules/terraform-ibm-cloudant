@@ -2,6 +2,7 @@
 package test
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"testing"
@@ -16,6 +17,7 @@ const resourceGroup = "geretain-test-cloudant"
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
 const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
+const basicExampleTerraformDir = "examples/basic"
 
 var validRegions = []string{
 	"che01",
@@ -28,6 +30,11 @@ var validRegions = []string{
 	"jp-osa",
 	"jp-tok",
 	"us-south",
+	"us-east",
+}
+
+var gen2Regions = []string{
+	"eu-de",
 	"us-east",
 }
 
@@ -140,4 +147,31 @@ func TestRunDedicatedSolutionSchematicUpgrade(t *testing.T) {
 	if !options.UpgradeTestSkipped {
 		assert.NoError(t, err, "Upgrade test should complete without errors")
 	}
+}
+
+func TestRunBasicGen2Example(t *testing.T) {
+	t.Parallel()
+
+	// set up a schematics test
+	region := gen2Regions[common.CryptoIntn(len(gen2Regions))]
+	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
+		Testing:                t,
+		TarIncludePatterns:     []string{"*.tf", fmt.Sprintf("%s/*.tf", basicExampleTerraformDir)},
+		TemplateFolder:         basicExampleTerraformDir,
+		Prefix:                 "cloudant-gen2",
+		Tags:                   []string{"test-schematic"},
+		DeleteWorkspaceOnFail:  false,
+		WaitJobCompleteMinutes: 60,
+	})
+
+	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
+		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "region", Value: region, DataType: "string"},
+		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "plan", Value: "standard-gen2", DataType: "string"},
+		{Name: "resource_group", Value: resourceGroup, DataType: "string"},
+	}
+
+	err := options.RunSchematicTest()
+	assert.NoError(t, err, "Schematic Test had unexpected error")
 }

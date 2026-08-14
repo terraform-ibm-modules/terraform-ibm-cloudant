@@ -15,13 +15,23 @@ variable "plan" {
   default     = "standard"
 
   validation {
-    condition     = contains(["standard", "lite"], var.plan)
-    error_message = "Supported plans: standard or lite. Cloudant instance on dedicated host supports standard plan only."
+    condition     = contains(["standard", "lite", "standard-gen2"], var.plan)
+    error_message = "Supported plans: standard, lite, or standard-gen2. Cloudant instance on dedicated host supports standard plan only."
   }
 
   validation {
     condition     = var.plan != "standard" && var.environment_crn != null ? false : true
     error_message = "Only standard plan is supported on a dedicated hardware instance"
+  }
+
+  validation {
+    condition     = var.plan == "standard-gen2" && var.environment_crn != null ? false : true
+    error_message = "The 'standard-gen2' plan does not support dedicated hardware (environment_crn)."
+  }
+
+  validation {
+    condition     = var.plan == "standard-gen2" && var.legacy_credentials ? false : true
+    error_message = "The 'standard-gen2' plan does not support legacy credentials. Set legacy_credentials to false."
   }
 }
 
@@ -55,13 +65,13 @@ variable "enable_cors" {
 
 variable "legacy_credentials" {
   type        = bool
-  description = "Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials."
+  description = "Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. Only available for IBM Cloudant Gen 1."
   default     = false # uses only IAM credentials
 }
 
 variable "include_data_events" {
   type        = bool
-  description = "Include data event types in events sent to IBM Cloud Activity Tracker. If set to false, only management events will be sent to Activity Tracker."
+  description = "Include data event types in events sent to IBM Cloud Activity Tracker Event Routing for the Cloudant instance. If set to false, only management events will be sent. For Gen 2 instances this maps to the broker parameter `dataservices.cloudant.configuration.audit.data_events`."
   default     = false
 }
 
@@ -89,7 +99,7 @@ variable "tags" {
 }
 
 variable "environment_crn" {
-  description = "Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance"
+  description = "Optional CRN of the IBM Cloudant Dedicated Hardware plan instance to provision a cloudant instance. Only for GEN 1 dedicated hardware plan."
   type        = string
   default     = null
 }
@@ -102,6 +112,11 @@ variable "service_endpoints" {
   validation {
     condition     = can(regex("public|public-and-private|private", var.service_endpoints))
     error_message = "Valid values for service_endpoints are 'public', 'public-and-private', and 'private'"
+  }
+
+  validation {
+    condition     = local.is_classic ? true : var.service_endpoints == "private"
+    error_message = "`service_endpoints` must be `private` for Gen2 instances."
   }
 }
 

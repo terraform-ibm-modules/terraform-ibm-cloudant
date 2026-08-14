@@ -1,3 +1,27 @@
+########################################################################################################################
+# Locals
+########################################################################################################################
+
+locals {
+  # Determine if gen2 plan is being used
+  is_gen2    = can(regex("-gen2$", var.plan))
+  is_classic = !local.is_gen2
+
+  gen2_public_endpoint  = local.is_gen2 ? (contains(keys(ibm_cloudant.cloudant_instance.extensions), "dataservices.connection.public_endpoint_url") ? ibm_cloudant.cloudant_instance.extensions["dataservices.connection.public_endpoint_url"] : null) : null
+  gen2_private_endpoint = local.is_gen2 ? (contains(keys(ibm_cloudant.cloudant_instance.extensions), "dataservices.connection.vpe_url") ? ibm_cloudant.cloudant_instance.extensions["dataservices.connection.vpe_url"] : null) : null
+  gen2_instance_url     = local.gen2_public_endpoint != null ? "${local.gen2_public_endpoint}/dashboard.html" : null
+
+  # Map Cloudant role names to their correct IAM role CRNs.
+  # Monitor and Checkpointer are Cloudant-specific service roles; Reader/Writer/Manager are IAM service roles.
+  cloudant_role_crns = {
+    Reader       = "crn:v1:bluemix:public:iam::::serviceRole:Reader"
+    Writer       = "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+    Manager      = "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+    Monitor      = "crn:v1:bluemix:public:cloudantnosqldb::::serviceRole:Monitor"
+    Checkpointer = "crn:v1:bluemix:public:cloudantnosqldb::::serviceRole:Checkpointer"
+  }
+}
+
 ##############################################################################
 # Standard Cloudant Instance
 ##############################################################################
@@ -12,7 +36,7 @@ resource "ibm_cloudant" "cloudant_instance" {
   resource_group_id   = var.resource_group_id
   enable_cors         = var.enable_cors
   tags                = var.tags
-  service_endpoints   = var.service_endpoints
+  service_endpoints   = local.is_classic ? var.service_endpoints : null
   environment_crn     = var.environment_crn
 
   dynamic "cors_config" {
@@ -75,11 +99,9 @@ resource "ibm_cloudant_database" "cloudant_database" {
 resource "ibm_resource_key" "service_credentials" {
   for_each             = { for key in var.service_credential_names : key.name => key }
   name                 = each.key
-  role                 = each.value.role
+  role                 = local.is_classic ? each.value.role : null
   resource_instance_id = ibm_cloudant.cloudant_instance.id
-  parameters = {
-    service-endpoints = each.value.endpoint
-  }
+  parameters           = local.is_gen2 ? { role_crn = local.cloudant_role_crns[each.value.role] } : { service-endpoints = each.value.endpoint, role_crn = local.cloudant_role_crns[each.value.role] }
 }
 
 locals {
@@ -90,22 +112,25 @@ locals {
   } : null
 
   service_credentials_object = length(var.service_credential_names) > 0 ? {
-    host = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["host"]
+    host = local.is_classic ? ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["host"] : null
     url  = ibm_resource_key.service_credentials[var.service_credential_names[0].name].credentials["url"]
     credentials = {
       for rk in ibm_resource_key.service_credentials :
       rk.name => merge(
         {
           apikey                 = rk.credentials["apikey"]
-          host                   = rk.credentials["host"]
+          host                   = local.is_classic ? rk.credentials["host"] : null
           url                    = rk.credentials["url"]
-          username               = rk.credentials["username"]
+          username               = local.is_classic ? rk.credentials["username"] : null
           iam_apikey_description = rk.credentials["iam_apikey_description"]
           iam_apikey_id          = rk.credentials["iam_apikey_id"]
           iam_apikey_name        = rk.credentials["iam_apikey_name"]
           iam_role_crn           = rk.credentials["iam_role_crn"]
           iam_serviceid_crn      = rk.credentials["iam_serviceid_crn"]
         },
+        local.is_gen2 ? {
+          vpe_url = rk.credentials["vpe_url"]
+        } : {},
         var.legacy_credentials ? {
           password = rk.credentials["password"]
           port     = rk.credentials["port"]

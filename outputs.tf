@@ -29,7 +29,7 @@ output "crn" {
 
 output "instance_url" {
   description = "The dashboard URL to access resource"
-  value       = ibm_cloudant.cloudant_instance.dashboard_url
+  value       = local.is_gen2 ? local.gen2_instance_url : ibm_cloudant.cloudant_instance.dashboard_url
 }
 
 output "resource_group_name" {
@@ -54,12 +54,12 @@ output "resource_keys_url" {
 
 output "public_endpoint" {
   description = "The external public endpoint"
-  value       = contains(keys(ibm_cloudant.cloudant_instance.extensions), "endpoints.public") ? ibm_cloudant.cloudant_instance.extensions["endpoints.public"] : null
+  value       = local.is_gen2 ? local.gen2_public_endpoint : (contains(keys(ibm_cloudant.cloudant_instance.extensions), "endpoints.public") ? "https://${ibm_cloudant.cloudant_instance.extensions["endpoints.public"]}" : null)
 }
 
 output "private_endpoint" {
   description = "The external private endpoint"
-  value       = contains(keys(ibm_cloudant.cloudant_instance.extensions), "endpoints.private") ? ibm_cloudant.cloudant_instance.extensions["endpoints.private"] : null
+  value       = local.is_gen2 ? local.gen2_private_endpoint : (contains(keys(ibm_cloudant.cloudant_instance.extensions), "endpoints.private") ? "https://${ibm_cloudant.cloudant_instance.extensions["endpoints.private"]}" : null)
 }
 
 output "db_map" {
