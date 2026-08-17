@@ -39,7 +39,7 @@ This module supports provisioning a instance of the IBM Cloudant service. With a
   <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions">Deployable Architectures</a>
     <ul>
       <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions/dedicated">IBM Cloudant Dedicated on IBM Cloud Dedicated</a></li>
-      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions/fully-configurable-gen2">IBM Cloudant Fully Configurable Gen2</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cloudant/tree/main/solutions/fully-configurable-gen2">IBM Cloud Databases Gen 2 (VPC) for Cloudant</a></li>
     </ul>
   </li>
   <li><a href="#contributing">Contributing</a></li>
@@ -119,7 +119,7 @@ No modules.
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | The name of the Cloudant instance | `string` | n/a | yes |
 | <a name="input_legacy_credentials"></a> [legacy\_credentials](#input\_legacy\_credentials) | Use both legacy credentials, in addition to IAM credentials for authentication. If set to false, use use only IAM credentials. Only available for IBM Cloudant Gen 1. | `bool` | `false` | no |
 | <a name="input_origins"></a> [origins](#input\_origins) | An array of strings that contain allowed origin domains. This value is only used if enable\_cors is set to true. | `list(string)` | `[]` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. Standard or lite. | `string` | `"standard"` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The plan for the Cloudant instance. `Standard`, `lite` or `standard-gen2`. | `string` | `"standard"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The IBM Cloud region where the Cloudant instance will be provisioned. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the instance will be grouped. | `string` | n/a | yes |
 | <a name="input_service_credential_names"></a> [service\_credential\_names](#input\_service\_credential\_names) | List of service credentials to create for the cloudant database, including name and optionally role and endpoint type. | <pre>list(object({<br/>    name     = string<br/>    role     = optional(string, "Reader")<br/>    endpoint = optional(string, "private")<br/>  }))</pre> | `[]` | no |

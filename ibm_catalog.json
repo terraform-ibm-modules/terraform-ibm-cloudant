@@ -301,7 +301,7 @@
               "key": "enable_cors"
             },
             {
-              "key": "existing_resource_group"
+              "key": "existing_resource_group_name"
             },
             {
               "key": "ibmcloud_api_key"
@@ -310,10 +310,13 @@
               "key": "include_data_events"
             },
             {
-              "key": "instance_name"
+              "key": "name"
             },
             {
               "key": "origins"
+            },
+            {
+              "key": "prefix"
             },
             {
               "key": "region",
@@ -369,9 +372,6 @@
               ]
             },
             {
-              "key": "resource_group_name"
-            },
-            {
               "key": "service_credential_names",
               "custom_config": {
                 "type": "code_editor",
@@ -383,6 +383,38 @@
                   ]
                 }
               }
+            },
+            {
+              "key": "existing_secrets_manager_instance_crn"
+            },
+            {
+              "key": "service_credential_secrets",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "skip_cloudant_secrets_manager_auth_policy"
+            },
+            {
+              "key": "existing_secrets_manager_endpoint_type",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                }
+              ]
             },
             {
               "key": "tags"

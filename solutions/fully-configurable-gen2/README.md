@@ -1,16 +1,5 @@
-# IBM Cloudant Fully Configurable Gen2
+# IBM Cloud Databases Gen 2 (VPC) for Cloudant
 
-This deployable architecture provisions an IBM Cloudant Gen2 instance and supports provisioning the following resources:
+This deployable architecture provides a fully configurable solution for IBM Cloud Databases Gen 2 (VPC) for Cloudant. For more information about Gen 2, see [Databases for Cloudant Gen 2](https://cloud.ibm.com/docs/cloudant-gen2?topic=cloudant-gen2-overview-gen1-gen2).
 
-- A resource group, if one is not passed in.
-- An IBM Cloudant Gen2 instance
-- IBM Cloudant databases
-- IBM Cloudant service credentials
-
-This solution wraps the root [`module "cloudant"`](main.tf:28) with the `standard-gen2` plan and exposes the Gen2-compatible inputs needed to configure the instance.
-
-## Before you begin
-
-- You need an IBM Cloud account with permissions to create Cloudant instances and resource groups.
-- Gen2 Cloudant instances in this solution use the `standard-gen2` plan.
-- Dedicated hardware and legacy credentials are not supported for Gen2 in the root module.
+:exclamation: **Important:** This solution is not intended to be called by other modules because it contains a provider configuration and is not compatible with the `for_each`, `count`, and `depends_on` arguments. For more information, see [Providers Within Modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers).

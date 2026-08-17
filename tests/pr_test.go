@@ -7,7 +7,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testschematic"
@@ -18,6 +20,7 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 const dedicatedTerraformDir = "solutions/dedicated"
 const modulesTerraformDir = "modules/fscloud"
 const basicExampleTerraformDir = "examples/basic"
+const fullyConfigurableGen2SolutionTerraformDir = "solutions/fully-configurable-gen2"
 
 var validRegions = []string{
 	"che01",
@@ -40,9 +43,16 @@ var gen2Regions = []string{
 
 var permanentResources map[string]interface{}
 
+var sharedInfoSvc *cloudinfo.CloudInfoService
+
 // TestMain will be run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	var err error
+	sharedInfoSvc, err = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	permanentResources, err = common.LoadMapFromYaml(yamlLocation)
 	if err != nil {
 		log.Fatal(err)
@@ -147,6 +157,72 @@ func TestRunDedicatedSolutionSchematicUpgrade(t *testing.T) {
 	if !options.UpgradeTestSkipped {
 		assert.NoError(t, err, "Upgrade test should complete without errors")
 	}
+}
+
+func generateUniqueResourceGroupName(baseName string) string {
+	id := uuid.New().String()[:8] // Shorten UUID for readability
+	return fmt.Sprintf("%s-%s", baseName, id)
+}
+
+// Test the fully-configurable-gen2 DA with defaults
+func TestRunFullyConfigurableGen2SolutionSchematics(t *testing.T) {
+	t.Parallel()
+
+	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
+		Testing: t,
+		TarIncludePatterns: []string{
+			"*.tf",
+			fullyConfigurableGen2SolutionTerraformDir + "/*.tf",
+		},
+		TemplateFolder:             fullyConfigurableGen2SolutionTerraformDir,
+		Prefix:                     "cloudant-gen2da",
+		ResourceGroup:              resourceGroup,
+		DeleteWorkspaceOnFail:      false,
+		WaitJobCompleteMinutes:     60,
+		CheckApplyResultForUpgrade: true,
+	})
+
+	uniqueResourceGroup := generateUniqueResourceGroupName(options.Prefix)
+
+	serviceCredentialSecrets := []map[string]interface{}{
+		{
+			"secret_group_name": fmt.Sprintf("%s-secret-group", options.Prefix),
+			"service_credentials": []map[string]string{
+				{
+					"secret_name": fmt.Sprintf("%s-cred-reader", options.Prefix),
+					"service_credentials_source_service_role_crn": "crn:v1:bluemix:public:iam::::role:Viewer",
+				},
+				{
+					"secret_name": fmt.Sprintf("%s-cred-writer", options.Prefix),
+					"service_credentials_source_service_role_crn": "crn:v1:bluemix:public:iam::::role:Editor",
+				},
+			},
+		},
+	}
+
+	serviceCredentialNames := []map[string]string{
+		{
+			"name":     "cloudant-admin",
+			"role":     "Manager",
+			"endpoint": "private",
+		},
+	}
+
+	options.TerraformVars = []testschematic.TestSchematicTerraformVar{
+		{Name: "prefix", Value: options.Prefix, DataType: "string"},
+		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
+		{Name: "access_tags", Value: permanentResources["accessTags"], DataType: "list(string)"},
+		{Name: "existing_resource_group_name", Value: uniqueResourceGroup, DataType: "string"},
+		{Name: "region", Value: "eu-de", DataType: "string"},
+		{Name: "service_credential_names", Value: serviceCredentialNames, DataType: "list(object)"},
+		{Name: "service_credential_secrets", Value: serviceCredentialSecrets, DataType: "list(object)"},
+		{Name: "existing_secrets_manager_instance_crn", Value: permanentResources["secretsManagerCRN"], DataType: "string"},
+	}
+
+	err := sharedInfoSvc.WithNewResourceGroup(uniqueResourceGroup, func() error {
+		return options.RunSchematicTest()
+	})
+	assert.Nil(t, err, "This should not have errored")
 }
 
 func TestRunBasicGen2Example(t *testing.T) {
