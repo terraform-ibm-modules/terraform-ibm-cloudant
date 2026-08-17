@@ -3,5 +3,5 @@
   "region": "us-south",
   "tags": $TAGS,
   "name": $PREFIX,
-  "existing_resource_group_name": "Default"
+  "existing_resource_group_name": "geretain-test-permanent"
 }
