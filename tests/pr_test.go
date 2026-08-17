@@ -168,6 +168,7 @@ func generateUniqueResourceGroupName(baseName string) string {
 func TestRunFullyConfigurableGen2SolutionSchematics(t *testing.T) {
 	t.Parallel()
 
+	region := gen2Regions[common.CryptoIntn(len(gen2Regions))]
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing: t,
 		TarIncludePatterns: []string{
@@ -175,7 +176,7 @@ func TestRunFullyConfigurableGen2SolutionSchematics(t *testing.T) {
 			fullyConfigurableGen2SolutionTerraformDir + "/*.tf",
 		},
 		TemplateFolder:             fullyConfigurableGen2SolutionTerraformDir,
-		Prefix:                     "cloudant-gen2da",
+		Prefix:                     "cldnt-gen2",
 		ResourceGroup:              resourceGroup,
 		DeleteWorkspaceOnFail:      false,
 		WaitJobCompleteMinutes:     60,
@@ -213,7 +214,7 @@ func TestRunFullyConfigurableGen2SolutionSchematics(t *testing.T) {
 		{Name: "ibmcloud_api_key", Value: options.RequiredEnvironmentVars["TF_VAR_ibmcloud_api_key"], DataType: "string", Secure: true},
 		{Name: "access_tags", Value: permanentResources["accessTags"], DataType: "list(string)"},
 		{Name: "existing_resource_group_name", Value: uniqueResourceGroup, DataType: "string"},
-		{Name: "region", Value: "eu-de", DataType: "string"},
+		{Name: "region", Value: region, DataType: "string"},
 		{Name: "service_credential_names", Value: serviceCredentialNames, DataType: "list(object)"},
 		{Name: "service_credential_secrets", Value: serviceCredentialSecrets, DataType: "list(object)"},
 		{Name: "existing_secrets_manager_instance_crn", Value: permanentResources["secretsManagerCRN"], DataType: "string"},
