@@ -216,6 +216,179 @@
           ],
           "terraform_version": "1.12.2",
           "ignore_readme": true
+        },
+        {
+          "label": "Fully configurable Gen2",
+          "name": "fully-configurable-gen2",
+          "install_type": "fullstack",
+          "working_directory": "solutions/fully-configurable-gen2",
+          "short_description": "Configurable Cloudant Gen2 deployment with databases and service credentials.",
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Viewer"
+              ],
+              "service_name": "Resource group only",
+              "notes": "Viewer access is required in the resource group you want to provision in."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "cloudantnosqldb",
+              "notes": "Required to create and configure the IBM Cloudant instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Operator",
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "secrets-manager",
+              "notes": "[Optional] Required to write Cloudant service credentials to an existing IBM Cloud Secrets Manager instance. 'Manager' access is required if new secret groups need to be created."
+            }
+          ],
+          "architecture": {
+            "features": [
+              {
+                "title": "IBM Cloudant Gen2 instance",
+                "description": "Yes"
+              },
+              {
+                "title": "IBM Cloudant databases",
+                "description": "Yes"
+              },
+              {
+                "title": "IBM Cloudant service credentials",
+                "description": "Yes"
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "IBM Cloudant Fully Configurable Gen2",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-cloudant/main/images/cloudant.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "This architecture supports creating and configuring an IBM Cloudant Gen2 instance, databases, and service credentials."
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
+              "key": "access_tags"
+            },
+            {
+              "key": "allow_credentials"
+            },
+            {
+              "key": "capacity"
+            },
+            {
+              "key": "database_config",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "enable_cors"
+            },
+            {
+              "key": "existing_resource_group_name"
+            },
+            {
+              "key": "ibmcloud_api_key"
+            },
+            {
+              "key": "include_data_events"
+            },
+            {
+              "key": "name"
+            },
+            {
+              "key": "origins"
+            },
+            {
+              "key": "prefix"
+            },
+            {
+              "key": "region"
+            },
+            {
+              "key": "service_credential_names",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "existing_secrets_manager_instance_crn"
+            },
+            {
+              "key": "service_credential_secrets",
+              "custom_config": {
+                "type": "code_editor",
+                "grouping": "deployment",
+                "original_grouping": "deployment",
+                "config_constraints": {
+                  "supportedLanguages": [
+                    "hcl"
+                  ]
+                }
+              }
+            },
+            {
+              "key": "skip_cloudant_secrets_manager_auth_policy"
+            },
+            {
+              "key": "existing_secrets_manager_endpoint_type",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                }
+              ]
+            },
+            {
+              "key": "tags"
+            }
+          ],
+          "terraform_version": "1.12.2",
+          "ignore_readme": true
         }
       ]
     }
