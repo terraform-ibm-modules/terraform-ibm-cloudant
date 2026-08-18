@@ -36,7 +36,7 @@ locals {
   classic_service_credential_names = [
     {
       name     = "cloudant_reader"
-      endpoint = "private"
+      endpoint = "public"
       role     = "Reader"
     },
     {

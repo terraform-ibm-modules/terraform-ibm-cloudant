@@ -165,4 +165,13 @@ variable "service_credential_names" {
     )
     error_message = "When `service_endpoints` is set to `public`, `service_credential_names.endpoint` value cannot be `private`."
   }
+
+  validation {
+    condition = !(
+      var.environment_crn == null &&
+      !can(regex("-gen2$", var.plan)) &&
+      anytrue([for credential in var.service_credential_names : credential.endpoint == "private"])
+    )
+    error_message = "Setting `service_credential_names.endpoint` to `private` requires a dedicated hardware environment. Set `environment_crn` to the CRN of a Cloudant Dedicated Hardware plan instance, or change `endpoint` to `public`."
+  }
 }

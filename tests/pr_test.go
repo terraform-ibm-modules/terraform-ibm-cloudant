@@ -169,6 +169,7 @@ func TestRunBasicGen2Example(t *testing.T) {
 		{Name: "region", Value: region, DataType: "string"},
 		{Name: "prefix", Value: options.Prefix, DataType: "string"},
 		{Name: "plan", Value: "standard-gen2", DataType: "string"},
+		{Name: "service_endpoints", Value: "private", DataType: "string"},
 		{Name: "resource_group", Value: resourceGroup, DataType: "string"},
 	}
 

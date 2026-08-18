@@ -18,7 +18,7 @@ variable "region" {
 
 variable "plan" {
   type        = string
-  description = "The plan for the Cloudant instance. Standard or lite."
+  description = "The plan for the Cloudant instance. `Standard`, `lite` or `standard-gen2`."
   default     = "standard"
 }
 
@@ -43,5 +43,5 @@ variable "resource_tags" {
 variable "service_endpoints" {
   type        = string
   description = "Sets the endpoint of the instance, valid values are 'public', 'private', or 'public-and-private'"
-  default     = "private"
+  default     = "public"
 }
