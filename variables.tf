@@ -11,7 +11,7 @@ variable "region" {
 
 variable "plan" {
   type        = string
-  description = "The plan for the Cloudant instance. Standard or lite."
+  description = "The plan for the Cloudant instance. `Standard`, `lite` or `standard-gen2`."
   default     = "standard"
 
   validation {
