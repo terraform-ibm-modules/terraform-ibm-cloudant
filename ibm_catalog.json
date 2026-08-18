@@ -235,7 +235,17 @@
               "role_crns": [
                 "crn:v1:bluemix:public:iam::::serviceRole:Manager"
               ],
-              "service_name": "cloudantnosqldb"
+              "service_name": "cloudantnosqldb",
+              "notes": "Required to create and configure the IBM Cloudant instance."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Operator",
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+              ],
+              "service_name": "secrets-manager",
+              "notes": "[Optional] Required to write Cloudant service credentials to an existing IBM Cloud Secrets Manager instance. 'Manager' access is required if new secret groups need to be created."
             }
           ],
           "architecture": {
@@ -326,17 +336,7 @@
               "key": "prefix"
             },
             {
-              "key": "region",
-              "options": [
-                {
-                  "displayname": "Frankfurt (eu-de)",
-                  "value": "eu-de"
-                },
-                {
-                  "displayname": "Washington DC (us-east)",
-                  "value": "us-east"
-                }
-              ]
+              "key": "region"
             },
             {
               "key": "service_credential_names",
