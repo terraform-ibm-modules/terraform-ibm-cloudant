@@ -1,8 +1,9 @@
 {
   "ibmcloud_api_key": $VALIDATION_APIKEY,
-  "region": "eu-de",
+  "region": "us-south",
   "tags": $TAGS,
   "instance_name": $PREFIX,
   "environment_crn": $CLOUDANT_DEDICATED_CRN,
-  "resource_group_name": $PREFIX
+  "existing_resource_group": true,
+  "resource_group_name": "geretain-test-cloudant"
 }
